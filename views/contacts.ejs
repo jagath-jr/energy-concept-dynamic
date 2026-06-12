@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: 'Contact Us | ' + (global.siteTitle || 'Energy Concept'), pageCss: 'contacts.css' }) %>
+
+<body>
+    <%- include('partials/header') %>
+    
+    <div id="header-placeholder"></div>
+  
+    <main class="cp-main">
+        
+        <section class="cp-hero">
+            <div class="cp-hero__overlay"></div>
+            <img src="images/contactus-herosection.webp" 
+                 alt="Contact Us Hero" 
+                 class="cp-hero__bg">
+            <div class="cp-hero__content">
+                <h1 class="cp-hero__title">Contact Us</h1>
+            </div>
+        </section>
+
+        <section class="cp-info-section">
+            <div class="cp-container">
+                <div class="cp-info-grid">
+                    
+                    <article class="cp-card">
+                        <div class="cp-card__icon-wrapper">
+                            <i class="fa-solid fa-phone cp-card__icon"></i>
+                        </div>
+                        <div class="cp-card__details">
+                            <h2 class="cp-card__title">Call Us</h2>
+                            <a href="tel:<%= global.phonePrimary.replace(/\s+/g, '') %>" class="cp-card__link">
+                                <%= global.phonePrimary %>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="cp-card">
+                        <div class="cp-card__icon-wrapper">
+                            <i class="fa-solid fa-envelope cp-card__icon"></i>
+                        </div>
+                        <div class="cp-card__details">
+                            <h2 class="cp-card__title">Email Us</h2>
+                            <a href="mailto:<%= global.email %>" class="cp-card__link">
+                                <%= global.email %>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="cp-card">
+                        <div class="cp-card__icon-wrapper">
+                            <i class="fa-solid fa-location-dot cp-card__icon"></i>
+                        </div>
+                        <div class="cp-card__details">
+                            <h2 class="cp-card__title">Our Address</h2>
+                            <address class="cp-card__text">
+                                <%- global.address.replace(/\n/g, '<br>') %>
+                            </address>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="cp-connect-section">
+            <div class="cp-container">
+                <h2 class="cp-section-title">Let’s Connect</h2>
+                
+                <div class="cp-connect-grid">
+                    
+                    <aside class="cp-map-wrapper">
+                        <iframe 
+                            src="<%= global.mapEmbedUrl %>" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; min-height: 100%;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Location Map">
+                        </iframe>
+                    </aside>
+
+                    <div class="cp-form-wrapper">
+                        <form id="contact-form" class="cp-form">
+                            
+                            <div class="cp-form__row">
+                                <div class="cp-form__group">
+                                    <label for="name" class="cp-sr-only">Name</label>
+                                    <input type="text" id="name" name="name" class="cp-form__input" placeholder="Name" required>
+                                </div>
+                                <div class="cp-form__group">
+                                    <label for="phone" class="cp-sr-only">Phone No</label>
+                                    <input type="tel" id="phone" name="phone" class="cp-form__input" placeholder="Phone No">
+                                </div>
+                            </div>
+
+                            <div class="cp-form__row">
+                                <div class="cp-form__group">
+                                    <label for="email" class="cp-sr-only">Email</label>
+                                    <input type="email" id="email" name="email" class="cp-form__input" placeholder="Email" required>
+                                </div>
+                                <div class="cp-form__group">
+                                    <label for="service" class="cp-sr-only">Choose Service</label>
+                                    <div class="cp-select-wrapper">
+                                        <select id="service" name="service" class="cp-form__select">
+                                            <option value="" disabled selected>Choose services</option>
+                                            <option value="Energy Consultation">Energy Consultation</option>
+                                            <option value="Installation">Installation</option>
+                                            <option value="Maintenance & Repair">Maintenance & Repair</option>
+                                            <option value="Battery Storage Solutions">Battery Storage Solutions</option>
+                                            <option value="EV Charger Installation">EV Charger Installation</option>
+                                            <option value="Energy Efficiency Audit">Energy Efficiency Audit</option>
+                                            <option value="Request a Free Quote">Request a Free Quote</option>
+                                            <option value="Technical Support">Technical Support</option>
+                                            <option value="Other Inquiry">Other Inquiry</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cp-form__group">
+                                <label for="message" class="cp-sr-only">Your Message</label>
+                                <textarea id="message" name="message" class="cp-form__textarea" placeholder="Your Message" rows="5"></textarea>
+                            </div>
+
+                            <button type="submit" class="cp-btn-submit">Submit</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="js/main.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="js/email.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Ensure GSAP is loaded
+        if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Hero Title Animation
+            gsap.to(".cp-hero__title", {
+                duration: 1.2,
+                opacity: 1,
+                y: 0,
+                ease: "power3.out",
+                delay: 0.2
+            });
+
+            // 2. Info Cards Animation
+            gsap.to(".cp-card", {
+                scrollTrigger: {
+                    trigger: ".cp-info-section",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                stagger: 0.2,
+                ease: "back.out(1.7)"
+            });
+
+            // 3. "Let's Connect" Title
+            gsap.to(".cp-section-title", {
+                scrollTrigger: {
+                    trigger: ".cp-connect-section",
+                    start: "top 75%"
+                },
+                duration: 1,
+                opacity: 1,
+                ease: "power2.out"
+            });
+
+            // 4. Map Slide In
+            gsap.to(".cp-map-wrapper", {
+                scrollTrigger: {
+                    trigger: ".cp-connect-grid",
+                    start: "top 70%"
+                },
+                duration: 1,
+                opacity: 1,
+                x: 0,
+                ease: "power3.out"
+            });
+
+            // 5. Form Slide In
+            gsap.to(".cp-form-wrapper", {
+                scrollTrigger: {
+                    trigger: ".cp-connect-grid",
+                    start: "top 70%"
+                },
+                duration: 1,
+                opacity: 1,
+                x: 0,
+                delay: 0.2,
+                ease: "power3.out"
+            });
+
+        } else {
+            console.warn("GSAP or ScrollTrigger not loaded. Animations disabled.");
+            document.querySelectorAll('.cp-hero__title, .cp-card, .cp-section-title, .cp-map-wrapper, .cp-form-wrapper').forEach(el => {
+                el.style.opacity = 1;
+                el.style.transform = 'none';
+            });
+        }
+    });  
+    </script>
+</body>
+</html>

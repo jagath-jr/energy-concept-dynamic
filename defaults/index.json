@@ -1,0 +1,55 @@
+{
+  
+  "slides": [
+    {
+      "title": "Powering Industries with Reliable Energy Solutions",
+      "description": "Engineering, installation, testing, and maintenance services for Power, Energy, Oil & Gas, and Industrial sectors across the UAE.",
+      "buttonText": "Request A Quote",
+      "buttonLink": "/contact",
+      "image": "assets/images/home-img/index-hero.webp"
+    },
+    {
+      "title": "Delivering Industries with Trusted Energy Solutions",
+      "description": "Engineering, installation, testing, and maintenance services for Power, Energy, Oil & Gas, and Industrial sectors, delivering reliable and efficient solutions across the UAE.",
+      "buttonText": "Request A Quote",
+      "buttonLink": "/contact",
+      "image": "assets/images/home-img/index-hero01.webp"
+    },
+    {
+      "title": "Supporting Industries with Advanced Power Solutions",
+      "description": "Providing engineering, installation, testing, and maintenance services for Power, Energy, Oil & Gas, and Industrial sectors throughout the UAE.",
+      "buttonText": "Request A Quote",
+      "buttonLink": "/contact",
+      "image": "assets/images/home-img/index-hero02.webp"
+    },
+    {
+      "title": "Enabling Industries with Reliable Energy Services",
+      "description": "Comprehensive engineering, installation, testing, and maintenance solutions for Power, Energy, Oil & Gas, and Industrial sectors across the UAE.",
+      "buttonText": "Request A Quote",
+      "buttonLink": "/contact",
+      "image": "assets/images/home-img/index-hero03.webp"
+    }
+  ],
+  "trustSectionTitle": "Why Trust us ?",
+
+  "trustFeatures": [
+    {
+      "text": "35+ years combined industry experience",
+      "icon": "assets/images/icon/box-add.png"
+    },
+    {
+      "text": "UAE-based engineering company",
+      "icon": "assets/images/icon/box-add.png"
+    },
+    {
+      "text": "Expertise up to 400kV substations & 220kV cables",
+      "icon": "assets/images/icon/box-add.png"
+    },
+    {
+      "text": "Turnkey project capability",
+      "icon": "assets/images/icon/box-add.png"
+    }
+  ],
+  "servicesIntroTitle": "Solutions We Deliver",
+  "servicesIntroDesc": "Energy Concepts offers integrated power and energy solutions covering high-voltage projects, turbomachinery services, automation, testing, and equipment supply."
+}

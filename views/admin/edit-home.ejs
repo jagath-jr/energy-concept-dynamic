@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Home Page | Admin Panel</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <div class="container py-5">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 mb-0">Edit Home Page</h1>
+                <p class="text-muted">Update the main banner and trust sections.</p>
+            </div>
+            <a href="/admin" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+            </a>
+        </div>
+<div class="card mb-4 border-0 shadow-sm">
+            <div class="card-body d-flex gap-2 bg-white rounded">
+                <form action="/admin/undo/index" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-warning text-dark">
+                        <i class="fas fa-undo me-2"></i>Undo Changes
+                    </button>
+                </form>
+                <form action="/admin/restore/index" method="POST" class="d-inline" onsubmit="return confirm('Reset Home Page to factory defaults? This cannot be undone.');">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-history me-2"></i>Restore Defaults
+                    </button>
+                </form>
+            </div>
+        </div>
+        <form action="/admin/save/object/home" method="POST" enctype="multipart/form-data">
+            
+            <div class="row g-4">
+                
+<div class="col-12">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-images me-2"></i>Hero Slider Section</h5>
+        </div>
+        <div class="card-body bg-light">
+            <% 
+            // Fallback to older data format if slides array doesn't exist yet
+            let slides = data.slides || [{
+                title: data.heroTitle || '',
+                description: data.heroDescription || '',
+                buttonText: data.heroButtonText || '',
+                buttonLink: data.heroButtonLink || '',
+                image: data.heroImage || ''
+            }];
+            %>
+            
+            <% slides.forEach(function(slide, index) { %>
+                <div class="border rounded p-4 mb-4 bg-white shadow-sm">
+                    <h6 class="fw-bold text-primary mb-3 border-bottom pb-2">Slide <%= index + 1 %></h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Title</label>
+                                <input type="text" name="slides[<%= index %>][title]" class="form-control" value="<%= slide.title %>">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Description</label>
+                                <textarea name="slides[<%= index %>][description]" class="form-control" rows="4"><%= slide.description %></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Button Text</label>
+                                    <input type="text" name="slides[<%= index %>][buttonText]" class="form-control" value="<%= slide.buttonText %>">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold">Button Link</label>
+                                    <input type="text" name="slides[<%= index %>][buttonLink]" class="form-control" value="<%= slide.buttonLink %>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Slide Background Image</label>
+                            <!-- Note: The name dynamically matches the backend parser (slide_image_0, slide_image_1) -->
+                            <input type="file" name="slide_image_<%= index %>" class="form-control mb-3">
+                            <input type="hidden" name="slides[<%= index %>][image]" value="<%= slide.image %>">
+                            
+                            <% if (slide.image) { %>
+                                <div class="p-2 border rounded bg-light text-center">
+                                    <p class="mb-1 text-muted small">Current Image:</p>
+                                    <img src="/<%= slide.image.startsWith('assets/') ? slide.image.replace('assets/', '') : slide.image %>" 
+                                         alt="Slide Image" class="img-fluid rounded shadow-sm" style="max-height: 180px; object-fit: cover;">
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+            <small class="text-muted"><i class="fas fa-info-circle me-1"></i> Note: To add more slides or remove existing ones, currently you must edit the <code>assets/data/index.json</code> file directly. Any slides listed in that file will automatically appear here for editing.</small>
+        </div>
+    </div>
+</div>
+
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-bolt me-2"></i>Services Intro Text</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Section Title</label>
+                                <input type="text" name="servicesIntroTitle" class="form-control" value="<%= data.servicesIntroTitle %>">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Section Description</label>
+                                <textarea name="servicesIntroDesc" class="form-control" rows="3"><%= data.servicesIntroDesc %></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-check-circle me-2"></i>"Why Trust Us" Section</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Section Title</label>
+                                    <input type="text" name="trustSectionTitle" class="form-control" value="<%= data.trustSectionTitle %>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Subtitle</label>
+                                    <input type="text" name="trustSectionSubtitle" class="form-control" value="<%= data.trustSectionSubtitle %>">
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            <h6 class="fw-bold mb-3">Trust Features (4 Items Recommended)</h6>
+                            
+                            <% if (data.trustFeatures && data.trustFeatures.length > 0) { %>
+                                <% data.trustFeatures.forEach(function(feature, index) { %>
+                                    <div class="row align-items-center mb-3 p-2 border rounded bg-light">
+                                        <div class="col-md-1 text-center">
+                                            <span class="badge bg-secondary rounded-circle"><%= index + 1 %></span>
+                                        </div>
+                                        <div class="col-md-11">
+                                            <input type="text" name="trustFeatures[<%= index %>][text]" 
+                                                   class="form-control" value="<%= feature.text %>" placeholder="Feature text...">
+                                            <input type="hidden" name="trustFeatures[<%= index %>][icon]" value="<%= feature.icon %>">
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            <% } else { %>
+                                <div class="alert alert-warning">No trust features found. Add them manually in the JSON file first.</div>
+                            <% } %>
+                            
+                            <small class="text-muted">Note: Currently, you can only edit the text for these features. Icons must be updated via the code or file system.</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="fixed-bottom bg-white border-top shadow p-3 text-end" style="z-index: 1000;">
+                <div class="container">
+                    <a href="/admin" class="btn btn-secondary me-2">Cancel</a>
+                    <button type="submit" class="btn btn-success px-5 fw-bold">
+                        <i class="fas fa-save me-2"></i>Save Home Page
+                    </button>
+                </div>
+            </div>
+            <div style="height: 100px;"></div>
+
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

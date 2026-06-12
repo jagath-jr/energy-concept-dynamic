@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Environment Variables (CRITICAL: Never commit this)
+.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor Directories
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# =========================
+# Project Specific Ignores
+# =========================
+
+# User Uploaded Images (Don't commit these)
+assets/images/uploads/
+
+# User Uploaded Resumes
+assets/data/resumes/
+
+# Automatic Backups created by the CMS
+assets/data/backups/
+
+# Optional: If you don't want to commit the "live" JSON database changes
+# (Uncomment the line below if you only want to ship 'defaults/' and not the current state)
+# assets/data/*.json

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "src": "assets/images/gallery-img/gallery-img1.webp",
+    "alt": "Gallery Image 1",
+    "category": "General"
+  },
+  {
+    "id": "2",
+    "src": "assets/images/gallery-img/gallery-img2.webp",
+    "alt": "Gallery Image 2",
+    "category": "General"
+  },
+  {
+    "id": "3",
+    "src": "assets/images/gallery-img/gallery-img3.webp",
+    "alt": "Gallery Image 3",
+    "category": "General"
+  },
+  {
+    "id": "4",
+    "src": "assets/images/gallery-img/gallery-img4.webp",
+    "alt": "Gallery Image 4",
+    "category": "General"
+  },
+  {
+    "id": "5",
+    "src": "assets/images/gallery-img/gallery-img5.webp",
+    "alt": "Gallery Image 5",
+    "category": "General"
+  },
+  {
+    "id": "6",
+    "src": "assets/images/gallery-img/gallery-img6.webp",
+    "alt": "Gallery Image 6",
+    "category": "General"
+  }
+]

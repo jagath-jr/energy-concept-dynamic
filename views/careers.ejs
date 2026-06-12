@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: 'Careers | ' + (global.siteTitle || 'Energy Concept'), pageCss: 'careers.css' }) %>
+
+<body>
+    <%- include('partials/header') %>
+    
+    <div id="header-placeholder"></div>
+
+    <section class="careers-hero">
+        <div class="banner" data-aos="fade-down" data-aos-delay="200">
+            <h2>Join Our Team</h2>
+        </div>
+    </section>
+
+    <section class="vacancies-section">
+        <h2 data-aos="fade-up">Current Openings</h2>
+        
+        <div class="company-description" data-aos="fade-up" data-aos-delay="100">
+            <p>At <%= global.companyName || 'Energy Concepts' %>, we believe our people are our greatest strength. We offer a professional work environment that encourages learning, teamwork, and long-term career growth in the Power & Energy sector.</p>
+            <p>We are always interested in connecting with skilled and motivated professionals who are passionate about engineering excellence and safety.</p>
+        </div>
+
+        <div class="vacancies-container" id="vacancies-list">
+            
+            <% if (jobs && jobs.length > 0) { %>
+                <% jobs.forEach(function(job, index) { %>
+                    <div class="job-vacancy-card" data-aos="fade-up" data-aos-delay="<%= (index + 1) * 100 %>">
+                        <div class="job-header">
+                            <h3><%= job.title %></h3>
+                            <span class="job-type"><%= job.type %></span>
+                        </div>
+                        <div class="job-location">
+                            <i class="fas fa-map-marker-alt"></i> <%= job.location %>
+                        </div>
+                        
+                        <% if (job.description && job.description.length > 0) { %>
+                            <ul class="job-description">
+                                <% if (Array.isArray(job.description)) { %>
+                                    <% job.description.forEach(function(item) { %>
+                                        <li><%= item %></li>
+                                    <% }); %>
+                                <% } else { %>
+                                    <li><%= job.description %></li>
+                                <% } %>
+                            </ul>
+                        <% } %>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p style="text-align:center;">There are no current openings at this time. Please check back later or submit a general application below.</p>
+            <% } %>
+
+        </div>
+    </section>
+
+    <main class="form-section">
+        <div class="form-container">
+            <div class="form-left">
+                <h3>Why Work With Us?</h3>
+                <ul>
+                    <li><strong>Exposure to large-scale power and infrastructure projects</strong></li>
+                    <li><strong>Opportunity to work with experienced industry professionals</strong></li>
+                    <li><strong>Supportive and safety-focused work culture</strong></li>
+                    <li><strong>Long-term career growth and skill development</strong></li>
+                    <li><strong>Competitive compensation based on experience</strong></li>
+                </ul>
+
+                <div class="resume-note">
+                    <h4><i class="fas fa-info-circle"></i> Important Note</h4>
+                    <p>After submitting this form, you will receive a confirmation email. If you have any issues uploading your resume, please contact us at:</p>
+                    <a href="mailto:<%= global.email %>" class="email-link"><%= global.email %></a>
+                </div>
+            </div>
+            
+            <div class="form-right">
+                <form id="career-form" enctype="multipart/form-data">
+                    <h2 class="form-heading">Application Form</h2>
+                    
+                    <div class="input-group">
+                        <input type="text" id="name" name="name" placeholder="Full Name" required />
+                        <input type="email" id="email" name="email" placeholder="Email Address" required />
+                    </div>
+
+                    <div class="input-group">
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required />
+                        <select id="position" name="position" required>
+                            <option value="" disabled selected>Position Applying For</option>
+                            <option value="HVAC-Technician">HVAC Technician</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="Plumber">Plumber</option>
+                            <option value="Civil-Engineer">Civil Engineer</option>
+                            <option value="Site-Supervisor">Site Supervisor</option>
+                            <option value="MEP-Engineer">MEP Engineer</option>
+                            <option value="General-Inquiry">General Inquiry / Other</option>
+                        </select>
+                    </div>
+
+                    <textarea id="message" name="message" placeholder="Your Message / Cover Letter" rows="6" required></textarea>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="resume" style="display:block; margin-bottom: 5px; color: #333; font-weight: bold;">Upload Resume (PDF/Word, Max 5MB)</label>
+                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required 
+                               style="background: #f8f9fa; color: #333; padding: 10px; width: 100%; border: 1px solid #ccc; border-radius: 8px;">
+                    </div>
+
+                    <button class="submit-btn" type="submit">Submit Application</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="js/main.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    </script>
+
+    <script src="js/email.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: energy_concept_app
+    ports:
+      - "3000:3000"
+    
+    # --- VOLUMES EXPLAINED ---
+    volumes:
+      # 1. PERSIST DATA & RESUMES: 
+      # Maps the host's 'assets/data' to the container.
+      # This saves your JSON database AND the new 'assets/data/resumes' folder.
+      - ./assets/data:/usr/src/app/assets/data
+
+      # 2. PERSIST IMAGE UPLOADS: 
+      # Maps only the uploads folder so you don't overwrite the app's built-in images.
+      - ./assets/images/uploads:/usr/src/app/assets/images/uploads
+
+      # 3. PREVENT OVERWRITE: 
+      # Keeps the container's installed 'node_modules' safe from host interference.
+      - /usr/src/app/node_modules
+
+    # Load ALL variables from .env automatically
+    env_file:
+      - .env
+
+    # Explicit overrides (Optional, but good for clarity)
+    environment:
+      - NODE_ENV=development
+      #NODE_ENV=production
+      - PORT=3000
+
+    restart: always

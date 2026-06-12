@@ -1,0 +1,295 @@
+/* --- CSS Reset / Base (Scoped via prefix) --- */
+:root {
+    --cp-font-primary: 'Inter', 'Segoe UI', sans-serif;
+    --cp-color-text-dark: #1a1a1a;
+    --cp-color-text-gray: #666666;
+    --cp-card-gradient: linear-gradient(135deg, #f3eef5 0%, #fcecf0 100%);
+    --cp-btn-gradient: linear-gradient(180deg, #5369c7 0%, #d64c6b 100%);
+    --cp-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.cp-main {
+    font-family: var(--cp-font-primary);
+    background-color: #ffffff;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.cp-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Accessibility: Screen Reader Only */
+.cp-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* --- Hero Section --- */
+.cp-hero {
+    position: relative;
+    height: 40vh;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.cp-hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.cp-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Darken image for text readability */
+    z-index: 2;
+}
+
+.cp-hero__title {
+    position: relative;
+    z-index: 3;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    opacity: 0; /* JS will animate this */
+    transform: translateY(30px);
+}
+
+/* --- Info Cards Section --- */
+.cp-info-section {
+    padding: 60px 0;
+}
+
+.cp-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Desktop: 3 columns */
+@media (min-width: 768px) {
+    .cp-info-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+}
+
+.cp-card {
+    background: var(--cp-card-gradient);
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: var(--cp-shadow);
+    transition: transform 0.3s ease;
+    opacity: 0; /* JS Animation initial state */
+    transform: translateY(30px);
+}
+
+.cp-card:hover {
+    transform: translateY(-5px);
+}
+
+.cp-card__icon-wrapper {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cp-card__icon {
+    font-size: 1.2rem;
+    color: #8e7bb0; /* Matches the muted purple icon tone */
+}
+
+.cp-card__details {
+    display: flex;
+    flex-direction: column;
+}
+
+.cp-card__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cp-color-text-gray);
+    margin: 0 0 5px 0;
+}
+
+.cp-card__link,
+.cp-card__text {
+    font-size: 0.95rem;
+    color: var(--cp-color-text-dark);
+    font-weight: 500;
+    text-decoration: none;
+    font-style: normal;
+    line-height: 1.4;
+}
+
+/* --- Connect Section --- */
+.cp-connect-section {
+    padding-bottom: 80px;
+}
+
+.cp-section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 50px;
+    color: #000;
+    opacity: 0;
+}
+
+.cp-connect-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    align-items: stretch;
+}
+
+@media (min-width: 992px) {
+    .cp-connect-grid {
+        grid-template-columns: 1fr 1.2fr; /* Map smaller, form larger */
+        gap: 50px;
+    }
+}
+
+/* Map Styling */
+.cp-map-wrapper {
+    width: 100%;
+    border-radius: 0; /* Design shows straight edges on map slices */
+    overflow: hidden;
+    min-height: 300px;
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+.cp-map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Create the collage effect visually using a mask or just object-position if strictly using one image */
+    object-position: center; 
+}
+
+/* Form Styling */
+.cp-form-wrapper {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 5px 40px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+    opacity: 0;
+    transform: translateX(30px);
+}
+
+.cp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cp-form__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media (min-width: 600px) {
+    .cp-form__row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.cp-form__input,
+.cp-form__select,
+.cp-form__textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: var(--cp-color-text-dark);
+    font-family: inherit;
+    transition: border-color 0.3s;
+    background-color: #fff;
+}
+
+.cp-form__input:focus,
+.cp-form__select:focus,
+.cp-form__textarea:focus {
+    outline: none;
+    border-color: #8e7bb0;
+}
+
+.cp-form__input::placeholder,
+.cp-form__textarea::placeholder {
+    color: #a0a0a0;
+}
+
+.cp-form__textarea {
+    resize: vertical;
+}
+
+/* Dropdown arrow fix */
+.cp-select-wrapper {
+    position: relative;
+}
+.cp-select-wrapper::after {
+    content: '\f107'; /* FontAwesome Chevron Down */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #a0a0a0;
+    font-size: 0.8rem;
+}
+.cp-form__select {
+    appearance: none;
+    cursor: pointer;
+}
+
+/* Submit Button */
+.cp-btn-submit {
+    background: var(--cp-btn-gradient);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    margin-top: 10px;
+}
+
+.cp-btn-submit:hover {
+    opacity: 0.9;
+}

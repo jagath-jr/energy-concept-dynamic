@@ -1,0 +1,74 @@
+<footer class="ec-footer" id="ec-footer-section">
+    <div class="ec-footer__overlay"></div>
+    
+    <div class="ec-footer__container">
+        <div class="ec-footer__content">
+            
+            <div class="ec-footer__col ec-footer__col--brand">
+               <div class="ec-footer__logo-wrapper">
+                    <img src="<%= global.logo ? global.logo : 'images/titleimg.png' %>" alt="<%= global.siteTitle || 'Energy Concept' %>" class="ec-footer__logo-img">
+                </div>
+                <h2 class="ec-footer__company-name"><%= global.companyName %></h2>
+                
+                <div class="ec-footer__socials">
+                    <% if (global.socialLinks.facebook) { %>
+                        <a href="<%= global.socialLinks.facebook %>" class="ec-footer__social-link" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <% } %>
+                    <% if (global.socialLinks.instagram) { %>
+                        <a href="<%= global.socialLinks.instagram %>" class="ec-footer__social-link" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <% } %>
+                    <% if (global.socialLinks.twitter) { %>
+                        <a href="<%= global.socialLinks.twitter %>" class="ec-footer__social-link" aria-label="X (Twitter)" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                    <% } %>
+                    <% if (global.socialLinks.linkedin) { %>
+                        <a href="<%= global.socialLinks.linkedin %>" class="ec-footer__social-link" aria-label="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="ec-footer__col ec-footer__col--links">
+                <h3 class="ec-footer__heading">Quick Links</h3>
+                <ul class="ec-footer__nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="/services">Our Services</a></li>
+                    <li><a href="/gallery">Gallery</a></li>
+                    <li><a href="/projects">Our Projects</a></li>
+                    <li><a href="/careers">Careers</a></li>
+                    <li><a href="/contact">Contact us</a></li>
+                </ul>
+            </div>
+
+            <div class="ec-footer__col ec-footer__col--contact">
+                <h3 class="ec-footer__heading">Get in Touch</h3>
+                <ul class="ec-footer__contact-list">
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:<%= global.phonePrimary.replace(/\s+/g, '') %>"><%= global.phonePrimary %></a>
+                    </li>
+                    <% if (global.phoneSecondary) { %>
+                    <li>
+                        <span class="ec-footer__spacer"></span> 
+                        <a href="tel:<%= global.phoneSecondary.replace(/\s+/g, '') %>"><%= global.phoneSecondary %></a>
+                    </li>
+                    <% } %>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:<%= global.email %>"><%= global.email %></a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span><%- global.address.replace(/\n/g, '<br>') %></span>
+                    </li>
+                </ul>
+            </div>
+
+        </div> 
+        
+        <div class="ec-footer__separator"></div>
+
+        <div class="ec-footer__bottom">
+            <p><%= global.footerText || '&copy; Pyramids Energy. All Rights Reserved.' %></p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: 'Our Services | ' + (global.siteTitle || 'Energy Concept'), pageCss: 'services.css' }) %>
+
+<body>
+    <%- include('partials/header') %>
+    
+    <div id="header-placeholder"></div>
+
+    <section class="services-hero">
+        
+        <div class="banner" data-aos="fade-down">
+            <h2 class="caption">Our Services</h2>
+        </div>
+    </section>
+
+    <section class="content-section text-center">
+        <div class="container">
+            <p>
+                We provide end-to-end MEP and construction services, including HVAC, electrical, plumbing, and civil works — ensuring quality, reliability, and efficiency in every project across the UAE.
+            </p>
+        </div>
+    </section>
+
+    <main class="page-main_electrical" id="dynamic-content">
+        <% if (services && Array.isArray(services) && services.length > 0) { %>
+            <% services.forEach(function(serviceGroup, index) { %>
+                <section id="<%= serviceGroup.id %>" class="page-main_hero-section section-group-<%= index %>">
+                    <div class="page-main_container">
+                        <div class="header-animate-<%= index %>">
+                            <h1 class="page-main_h1"><%= serviceGroup.mainService %></h1>
+                            <p class="page-main_intro"><%= serviceGroup.mainDescription %></p>
+                        </div>
+                        
+                        <div class="page-main_grid" id="grid-<%= index %>">
+                            <% if (serviceGroup.subParts && serviceGroup.subParts.length > 0) { %>
+                                <% serviceGroup.subParts.forEach(function(sub) { %>
+                                    <article class="page-main_card card-group-<%= index %>">
+                                        <div class="page-main_img-box">
+                                            <% if (sub.img) { %>
+                                                <img src="<%= sub.img.startsWith('assets/') ? sub.img.replace('assets/', '') : sub.img %>" 
+                                                     alt="<%= sub.alt || sub.title %>" 
+                                                     loading="lazy">
+                                            <% } else { %>
+                                                <img src="images/titleimg.png" alt="Placeholder" loading="lazy">
+                                            <% } %>
+                                        </div>
+                                        <div class="page-main_content">
+                                            <h2 class="page-main_h2"><%= sub.title %></h2>
+                                            <p class="page-main_p"><%= sub.desc %></p>
+                                        </div>
+                                    </article>
+                                <% }); %>
+                            <% } %>
+                        </div>
+                    </div>
+                </section>
+
+                <% if (index !== services.length - 1) { %>
+                    <hr class="section-divider">
+                <% } %>
+            <% }); %>
+        <% } else { %>
+            <div class="container text-center py-5">
+                <p>No services content available at the moment.</p>
+            </div>
+        <% } %>
+    </main>
+    
+    <%- include('partials/footer') %>
+
+    <script src="js/main.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // FIX 4: Safe output for 'count' to prevent JS syntax error
+            // This ensures it prints '0' instead of 'undefined' if data is missing
+            const count = '<%= (services && Array.isArray(services)) ? services.length : 0 %>' * 1;
+            
+            const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+            // Initialize Animations loop
+            for (let i = 0; i < count; i++) {
+                
+                // 1. Animate Section Title & Description
+                // Check if element exists before animating to avoid GSAP warnings
+                if (document.querySelector(`.header-animate-${i}`)) {
+                    gsap.from(`.header-animate-${i}`, {
+                        scrollTrigger: {
+                            trigger: `.section-group-${i}`,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        },
+                        y: 30,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "power3.out"
+                    });
+                }
+
+                // 2. Animate Cards
+                if (document.querySelector(`.card-group-${i}`)) {
+                    gsap.to(`.card-group-${i}`, {
+                        scrollTrigger: {
+                            trigger: `#grid-${i}`,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        },
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        stagger: isMobile ? 0.1 : 0.15,
+                        ease: "power2.out",
+                        onComplete: function() {
+                            if(isMobile) {
+                                gsap.set(this.targets(), { clearProps: "transform" });
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Handle Deep Linking (Scroll to specific section like #power-projects)
+            if(window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                setTimeout(() => {
+                    const targetElement = document.getElementById(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 100); 
+            }
+        });
+    </script>
+</body>
+</html>

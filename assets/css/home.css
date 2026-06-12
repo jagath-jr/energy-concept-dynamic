@@ -1,0 +1,903 @@
+/* Hero Slider */
+/* --- HERO MODULE STYLES --- */
+/* --- HERO SLIDER --- */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Adjust based on your preferred height */
+    overflow: hidden;
+    background-color: #000;
+}
+
+.hero-slider__wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.45, 0, 0.15, 1); /* Smooth sliding animation */
+    will-change: transform;
+}
+
+.hero-slider__slide {
+    flex: 0 0 100%; /* Each slide takes up 100% of the viewport width */
+    position: relative;
+    height: 100%;
+}
+
+.hero-slider__bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-slider__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Dark overlay to make text readable */
+.hero-slider__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+}
+
+.hero-slider__content-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-slider__text-group {
+    max-width: 700px;
+    color: #ffffff;
+}
+
+.hero-slider__title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-slider__description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+
+/* Gradient Button matching the UI design */
+.hero-slider__cta-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #5b54a4 0%, #d84b5b 100%);
+    color: #ffffff;
+    padding: 14px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(216, 75, 91, 0.4);
+}
+
+.hero-slider__cta-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    color: #fff;
+}
+/* --- HERO SLIDER TEXT ANIMATIONS --- */
+
+/* 1. Hide text elements by default on all slides */
+.hero-slider__title,
+.hero-slider__description,
+.hero-slider__cta-btn {
+    opacity: 0;
+    visibility: hidden;
+    animation-fill-mode: forwards; /* Keeps the text visible after animation ends */
+}
+
+/* 2. ODD SLIDES: Title drops down, Description slides from the left */
+.hero-slider__slide:nth-child(odd).active-slide .hero-slider__title {
+    animation: slideDownFade 1s cubic-bezier(0.25, 1, 0.5, 1) 0.4s forwards;
+}
+.hero-slider__slide:nth-child(odd).active-slide .hero-slider__description {
+    animation: slideRightFade 1s cubic-bezier(0.25, 1, 0.5, 1) 0.7s forwards;
+}
+
+/* 3. EVEN SLIDES: Title slides up, Description slides from the right */
+.hero-slider__slide:nth-child(even).active-slide .hero-slider__title {
+    animation: slideUpFade 1s cubic-bezier(0.25, 1, 0.5, 1) 0.4s forwards;
+}
+.hero-slider__slide:nth-child(even).active-slide .hero-slider__description {
+    animation: slideLeftFade 1s cubic-bezier(0.25, 1, 0.5, 1) 0.7s forwards;
+}
+
+/* 4. BUTTON ANIMATION: Pops in on all slides with a slight delay */
+.hero-slider__slide.active-slide .hero-slider__cta-btn {
+    animation: zoomInFade 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s forwards;
+}
+
+
+/* --- ANIMATION KEYFRAMES --- */
+
+@keyframes slideDownFade {
+    0% { opacity: 0; transform: translateY(-40px); visibility: visible; }
+    100% { opacity: 1; transform: translateY(0); visibility: visible; }
+}
+
+@keyframes slideUpFade {
+    0% { opacity: 0; transform: translateY(40px); visibility: visible; }
+    100% { opacity: 1; transform: translateY(0); visibility: visible; }
+}
+
+@keyframes slideRightFade {
+    0% { opacity: 0; transform: translateX(-40px); visibility: visible; }
+    100% { opacity: 1; transform: translateX(0); visibility: visible; }
+}
+
+@keyframes slideLeftFade {
+    0% { opacity: 0; transform: translateX(40px); visibility: visible; }
+    100% { opacity: 1; transform: translateX(0); visibility: visible; }
+}
+
+@keyframes zoomInFade {
+    0% { opacity: 0; transform: scale(0.8); visibility: visible; }
+    100% { opacity: 1; transform: scale(1); visibility: visible; }
+}
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .hero-slider__title { font-size: 2.2rem; }
+    .hero-slider__description { font-size: 1rem; }
+}
+
+/* Base reset for this module only to ensure consistency */
+.hero-mod, .hero-mod * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-mod {
+    position: relative;
+    width: 100%;
+    /* Viewport height minus header estimate (approx 80px) */
+    min-height: calc(100vh - 80px); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Fallback fonts */
+}
+
+/* Background Image Handling */
+.hero-mod__bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hero-mod__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Dark Overlay for Text Readability */
+.hero-mod__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom, 
+        rgba(0, 0, 0, 0.4) 0%, 
+        rgba(0, 0, 0, 0.7) 100%
+    );
+}
+
+/* Content Layout */
+.hero-mod__content-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    color: #ffffff;
+}
+
+.hero-mod__text-group {
+    max-width: 800px;
+}
+
+/* Typography */
+.hero-mod__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    opacity: 0; /* Hidden initially for GSAP */
+}
+
+.hero-mod__description {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    color: #e0e0e0;
+    max-width: 650px;
+    opacity: 0; /* Hidden initially for GSAP */
+}
+
+/* CTA Button Styling */
+.hero-mod__cta-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 8px;
+    /* Gradient matching the design: Purple/Blue to Red/Pink */
+    background: linear-gradient(90deg, #5b5ea6 0%, #d64045 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 1; /* Hidden initially for GSAP */
+    transform: translateY(0);
+}
+
+.hero-mod__cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* --- RESPONSIVE BREAKPOINTS (Mobile First Default) --- */
+
+/* Tablet & Up */
+@media (min-width: 768px) {
+    .hero-mod__title {
+        font-size: 3.5rem;
+    }
+    
+    .hero-mod__description {
+        font-size: 1.25rem;
+    }
+}
+
+/* Desktop & Up */
+@media (min-width: 1024px) {
+    .hero-mod__title {
+        font-size: 4rem;
+    }
+}
+/*-------------------------------------------*/
+
+
+
+/* ====================================================== */
+/* Styling for the "Why Choose Us" Section */
+/* ====================================================== */
+
+
+/* PREFIX: trust-section_ 
+   Standard: BEM (Block Element Modifier)
+   Purpose: Isolation from existing Header/Footer styles
+*/
+
+/* Variables specific to this section to ensure no pollution */
+:root {
+    --trust-primary-text: #000000;
+    --trust-secondary-text: #444444;
+    --trust-bg-white: #ffffff;
+    --trust-accent-gradient: linear-gradient(180deg, #3766B8 0%, #F34546 100%); /* Purple/Pink gradient approximation */
+    --trust-gap: 2rem;
+}
+
+.trust-section {
+   
+    padding: 60px 20px;
+    background-color: var(--trust-bg-white);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Fallback fonts */
+    overflow: hidden; /* Prevents scrollbars during animations */
+}
+
+.trust-section__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Header Styling --- */
+.trust-section__header {
+    margin-bottom: 40px;
+}
+
+.trust-section__subtitle {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--trust-primary-text);
+    margin-bottom: 0.5rem;
+}
+
+.trust-section__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--trust-primary-text);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* --- Layout (Grid System) --- */
+.trust-section__layout {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: Stacked */
+    gap: 40px;
+    align-items: center;
+}
+
+/* --- Visual Column (Image) --- */
+.trust-section__visual-col {
+    width: 100%;
+}
+
+.trust-section__figure {
+    margin: 0;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.trust-section__main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/3; /* Enforces consistent shape */
+}
+
+/* --- Features Grid --- */
+.trust-section__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Mobile: 1 column */
+    gap: 30px;
+}
+
+.trust-section__feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align on mobile */
+    text-align: center;
+}
+
+.trust-section__icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--trust-accent-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 15px rgba(161, 140, 209, 0.3);
+    transition: transform 0.3s ease;
+}
+
+/* Subtle hover effect for interactivity */
+.trust-section__feature-item:hover .trust-section__icon-wrapper {
+    transform: translateY(-5px);
+}
+
+.trust-section__icon {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1); /* Turns black icons white */
+}
+
+.trust-section__feature-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--trust-secondary-text);
+    margin: 0;
+    max-width: 250px;
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet & Up (Switch features to 2x2 grid) */
+@media (min-width: 600px) {
+    .trust-section__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
+
+/* Desktop & Up (Side by side layout) */
+@media (min-width: 992px) {
+    .trust-section {
+        padding: 100px 20px;
+    }
+
+    .trust-section__layout {
+        grid-template-columns: 1.1fr 0.9fr; /* Image slightly larger */
+        gap: 60px;
+    }
+    
+    .trust-section__feature-item {
+        align-items: flex-start; /* Left align text on desktop */
+        text-align: left;
+    }
+
+    .trust-section__title {
+        font-size: 3.5rem;
+    }
+}
+
+
+
+
+
+
+
+
+/*-----------------------------------------------*/
+
+
+/* --- SERVICES MODULE (serv-mod) --- */
+.serv-mod {
+    padding: 4rem 1.5rem;
+    background-color: #f9f9fa;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden; /* Prevents scrollbar flashes */
+    opacity: 1;
+}
+
+.serv-mod__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+
+.serv-mod__header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.serv-mod__main-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #000;
+   
+}
+
+/* --- GRID / SLIDER CONTAINER --- */
+.serv-mod__grid {
+    display: grid;
+    gap: 1.5rem;
+    /* Default is Desktop Grid Logic */
+    grid-template-columns: repeat(3, 1fr); 
+    width: 100%;
+}
+
+/* --- INTRO BLOCK (Static) --- */
+.serv-mod__intro-block {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.serv-mod__intro-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: #1a1a1a;
+}
+
+.serv-mod__intro-desc {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.serv-mod__swipe-hint {
+    display: none; /* Hidden on desktop */
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 600;
+}
+
+/* --- SERVICE CARDS (Dynamic) --- */
+.serv-mod__card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 90%; /* Ensure equal height */
+    min-height: 320px;
+    opacity: 0; /* Hidden for GSAP */
+}
+
+.serv-mod__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Icons */
+.serv-mod__icon-wrap {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    /* Gradient: Pink/Red to Blue/Purple */
+    background: linear-gradient(135deg, #ef5350 0%, #7e57c2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.serv-mod__card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #1a1a1a;
+}
+
+.serv-mod__card-desc {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Pushes button to bottom */
+}
+
+/* Button */
+.serv-mod__btn {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: white;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #7e57c2 0%, #ef5350 100%);
+    transition: opacity 0.3s ease;
+}
+
+.serv-mod__btn:hover {
+    opacity: 0.9;
+}
+/* --- MOBILE NAVIGATION CONTROLS --- */
+.serv-mod__nav-controls {
+    display: none; /* Hidden by default (Desktop) */
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.serv-nav-btn {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.serv-nav-btn:hover {
+    background-color: #7e57c2; /* Matches your theme purple */
+    color: #fff;
+    border-color: #7e57c2;
+    transform: scale(1.1);
+}
+
+/* --- MOBILE SLIDER LOGIC (Max Width 1024px) --- */
+@media (max-width: 1024px) {
+    
+    .serv-mod__grid {
+        /* Turn Grid into Flex Row */
+        display: flex;
+        overflow-x: auto; /* Allow horizontal scrolling */
+        scroll-snap-type: x mandatory; /* Physics-based snapping */
+        padding-bottom: 2rem; /* Space for scrollbar/shadow */
+        -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
+    }
+
+    .serv-mod__intro-block {
+        /* The intro block takes full width in the slider */
+        min-width: 85vw; 
+        scroll-snap-align: center;
+        padding: 0 1rem;
+    }
+
+    .serv-mod__card {
+        /* Cards take up 85% of screen width */
+        min-width: 80vw;
+        scroll-snap-align: center;
+       
+    }
+
+    .serv-mod__swipe-hint {
+        display: block; /* Show hint on mobile */
+    }
+
+    /* Hide scrollbar for cleaner look (optional) */
+    .serv-mod__grid::-webkit-scrollbar {
+        height: 6px;
+    }
+    .serv-mod__grid::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+    /* Show controls on mobile/tablet */
+    .serv-mod__nav-controls {
+        display: flex; 
+    }
+
+    /* Ensure scroll behavior is smooth */
+    .serv-mod__grid {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        
+        /* Hide scrollbar for cleaner look since we have buttons now */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE 10+ */
+    }
+    
+    .serv-mod__grid::-webkit-scrollbar { 
+        display: none; /* Chrome/Safari */
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .serv-mod__card, .serv-mod__intro-block {
+        min-width: 45vw; /* Show 2 cards at a time on tablet */
+    }
+}
+
+
+
+
+
+
+/*=========== Quick Connect Section =============*/
+
+/* --- Variables & Reset --- */
+:root {
+    /* Exact gradients sampled from image */
+    --pm-grad-card: linear-gradient(135deg, #8c9ed8 0%, #f0909d 100%);
+    --pm-grad-btn: linear-gradient(90deg, #5e6ca9 0%, #d4505e 100%);
+    
+    /* Colors */
+    --pm-dark-text: #000000;
+    --pm-light-text: #ffffff;
+    --pm-input-border: #dae1e7; /* Light blue-grey border */
+    --pm-placeholder: #9faec3;  /* Blue-tinted placeholder */
+    --pm-bg-color: #ffffff;
+    
+    /* Spacing & Radius */
+    --pm-radius-input: 8px;
+    --pm-radius-card: 20px;
+    --pm-font-stack: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.pm-main-wrapper {
+    font-family: var(--pm-font-stack);
+    background-color: #fdfdfd;
+    padding: 1rem 2rem; /* Compact padding for mobile */
+    overflow-x: hidden;
+}
+
+.pm-container {
+    max-width: 1000px; /* Constrained width to match layout */
+    margin: 0 auto;
+}
+
+.pm-content-grid {
+    display: flex;
+    flex-direction: column; /* Stack Form on top of Card on mobile */
+    gap: 40px;
+}
+
+/* --- Left Column: Form Styling --- */
+.pm-form-container {
+    width: 100%;
+}
+
+.pm-heading {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--pm-dark-text);
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+.pm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* --- THE 2-COLUMN MOBILE FIX --- */
+.pm-inputs-row {
+    display: grid;
+    /* Force 2 columns regardless of screen size */
+    grid-template-columns: 1fr 1fr; 
+    gap: 10px; /* Tight gap so it fits on small screens */
+}
+
+.pm-input, 
+.pm-textarea {
+    width: 100%;
+    /* Tight padding for mobile */
+    padding: 12px 10px; 
+    border: 1.5px solid var(--pm-input-border);
+    border-radius: var(--pm-radius-input);
+    font-size: 0.9rem; /* Slightly smaller text */
+    color: #333;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box; /* Crucial for padding alignment */
+}
+
+/* Custom Placeholder Color (Blueish Grey) */
+.pm-input::placeholder,
+.pm-textarea::placeholder {
+    color: var(--pm-placeholder);
+    opacity: 1;
+}
+
+.pm-input:focus,
+.pm-textarea:focus {
+    border-color: #8c9ed8;
+}
+
+.pm-textarea {
+    min-height: 150px;
+    resize: none;
+    font-family: inherit;
+}
+
+/* Select Styling */
+.pm-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c9ed8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+    color: var(--pm-placeholder); 
+}
+
+.pm-select:valid {
+    color: #333;
+}
+
+/* Submit Button */
+.pm-btn-submit {
+    width: 100%;
+    padding: 15px;
+    margin-top: 5px;
+    background: var(--pm-grad-btn);
+    color: var(--pm-light-text);
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--pm-radius-input);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(212, 80, 94, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pm-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 80, 94, 0.4);
+}
+
+/* --- Right Column: Info Card Styling --- */
+.pm-info-card {
+    background: var(--pm-grad-card);
+    border-radius: var(--pm-radius-card);
+    padding: 30px; /* Reduced padding for mobile */
+    color: var(--pm-light-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 30px;
+    box-shadow: 0 10px 30px rgba(140, 158, 216, 0.3);
+}
+
+.pm-info-title {
+    font-size: 1.3rem; 
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+}
+
+.pm-info-text, 
+.pm-info-text a {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    font-style: normal;
+    text-decoration: none;
+}
+
+.pm-info-text a:hover {
+    text-decoration: underline;
+}
+
+/* --- Responsive Layout (Desktop) --- */
+/* Restores larger sizes when screen is big enough */
+@media (min-width: 992px) {
+    .pm-main-wrapper {
+        padding: 80px 20px;
+    }
+
+    .pm-content-grid {
+        flex-direction: row; /* Side by side layout */
+        align-items: stretch;
+        gap: 60px; /* Wide gap */
+    }
+
+    .pm-form-container {
+        flex: 1.2; 
+    }
+
+    .pm-info-card {
+        flex: 0.8;
+        padding: 45px 45px 45px 50px; /* Original large padding */
+        /* min-height: 550px; */
+    }
+
+    .pm-heading {
+        font-size: 2rem;
+    }
+
+    /* Restore larger gaps for Desktop */
+    .pm-inputs-row {
+        gap: 25px;
+    }
+
+    /* Restore larger inputs for Desktop */
+    .pm-input, .pm-textarea {
+        padding: 14px 18px;
+        font-size: 0.95rem;
+    }
+}

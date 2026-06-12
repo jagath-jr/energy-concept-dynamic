@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: 'Ongoing Projects | ' + (global.siteTitle || 'Energy Concept'), pageCss: 'ongoing-project.css' }) %>
+
+<body>
+    <%- include('partials/header') %>
+    
+    <div id="header-placeholder"></div>
+
+    <section class="project-hero">
+        <div class="banner" data-aos="fade-down" data-aos-delay="200">
+            <h2>Ongoing Projects</h2>
+        </div>
+    </section>
+
+    <main class="project-section" id="project-container-main">
+        
+        <% if (projects && projects.length > 0) { %>
+            <% projects.forEach(function(project, index) { %>
+                <div class="project-container">
+                    
+                    <div class="project-details" data-aos="fade-up">
+                        <h3><%= project.title %></h3>
+                        <ul>
+                            <li>
+                                <span>Client:</span>
+                                <strong><%= project.client %></strong>
+                            </li>
+                            <li>
+                                <span>Main Contractor:</span>
+                                <strong><%= project.mainContractor %></strong>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <% if (project.image || project.imageLarge) { %>
+                    <div class="project-images">
+                        <div class="image-large" data-aos="fade-up" data-aos-delay="100">
+                            <% let imgPath = project.image || project.imageLarge; %>
+                            <img src="<%= imgPath.startsWith('assets/') ? imgPath.replace('assets/', '') : imgPath %>" 
+                                 alt="Project image for <%= project.title %>">
+                        </div>
+                        
+                        <% if (project.imageSmall1 || project.imageSmall2) { %>
+                        <div class="image-small-stack">
+                            <% if (project.imageSmall1) { %>
+                            <div class="image-small" data-aos="fade-up" data-aos-delay="200">
+                                <img src="<%= project.imageSmall1.replace('assets/', '') %>" alt="Detail 1">
+                            </div>
+                            <% } %>
+                            <% if (project.imageSmall2) { %>
+                            <div class="image-small" data-aos="fade-up" data-aos-delay="300">
+                                <img src="<%= project.imageSmall2.replace('assets/', '') %>" alt="Detail 2">
+                            </div>
+                            <% } %>
+                        </div>
+                        <% } %>
+                    </div>
+                    <% } %>
+
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p style="text-align:center; padding: 2rem;">No ongoing projects listed at this time.</p>
+        <% } %>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="js/main.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    </script>
+</body>
+</html>

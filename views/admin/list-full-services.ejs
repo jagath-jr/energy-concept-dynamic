@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Full Services Page | Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h3 mb-0">Manage Services Page</h1>
+                <p class="text-muted">Edit the detailed services content. Main Categories added here will appear on the Home Page.</p>
+            </div>
+            <a href="/admin" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Dashboard</a>
+        </div>
+
+        <div class="card mb-4 border-0 shadow-sm">
+            <div class="card-body d-flex gap-2 bg-white rounded">
+                <form action="/admin/undo/services" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-warning text-dark"><i class="fas fa-undo me-2"></i>Undo</button>
+                </form>
+                <form action="/admin/restore/services" method="POST" class="d-inline" onsubmit="return confirm('Reset to defaults?');">
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-history me-2"></i>Restore Defaults</button>
+                </form>
+                <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                    <i class="fas fa-plus-circle me-2"></i>Add Main Category
+                </button>
+            </div>
+        </div>
+
+        <% if (list && list.length > 0) { %>
+            <div class="accordion" id="servicesAccordion">
+                <% list.forEach(function(category, catIndex) { %>
+                    <div class="accordion-item mb-3 border shadow-sm rounded overflow-hidden">
+                        
+                        <h2 class="accordion-header" id="heading<%= catIndex %>">
+                            <button class="accordion-button collapsed bg-light text-dark fw-bold d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= catIndex %>">
+                                
+                               <div style="width: 30px; text-align: center; margin-right: 15px;">
+                                    <% 
+                                        let previewIcon = category.categoryIcon;
+                                        if (previewIcon && !previewIcon.includes('titleimg.png') && previewIcon !== '') {
+                                            previewIcon = previewIcon.replace('assets/', '');
+                                        } else {
+                                            previewIcon = 'images/icon/box-add.png';
+                                        }
+                                    %>
+                                    <img src="/<%= previewIcon %>" alt="icon" style="width: 100%; height: 30px; object-fit: contain;">
+                                </div>
+                                
+                                <%= category.mainService %> 
+                                <span class="badge bg-secondary ms-3"><%= category.subParts ? category.subParts.length : 0 %> Sub-services</span>
+                            </button>
+                        </h2>
+
+                        <div id="collapse<%= catIndex %>" class="accordion-collapse collapse" data-bs-parent="#servicesAccordion">
+                            <div class="accordion-body bg-white">
+                                
+                                <div class="alert alert-info d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3 p-2 bg-white rounded border d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                                            <% if (category.categoryIcon && !category.categoryIcon.includes('titleimg.png')) { %>
+                                                <img src="/<%= category.categoryIcon.replace('assets/', '') %>" alt="Category Icon" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                            <% } else { %>
+                                                <span style="font-size: 2rem;">⚡</span>
+                                            <% } %>
+                                        </div>
+                                        <div>
+                                            <strong>Home Page Description:</strong><br>
+                                            <%= category.mainDescription %>
+                                        </div>
+                                    </div>
+                                    <form action="/admin/services/delete-category/<%= catIndex %>" method="POST" onsubmit="return confirm('Delete entire category? This will remove it from the Home Page as well.');">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete Category</button>
+                                    </form>
+                                </div>
+
+                                <h6 class="border-bottom pb-2 mt-4 mb-3">Sub-Services (Details Page)</h6>
+                                
+                                <div class="row g-3">
+                                    <% if (category.subParts && category.subParts.length > 0) { %>
+                                        <% category.subParts.forEach(function(sub, subIndex) { %>
+                                            <div class="col-md-6 col-lg-4">
+                                                <div class="card h-100">
+                                                    <div class="card-img-top text-center bg-light p-3" style="height: 150px;">
+                                                        <img src="/<%= sub.img.startsWith('assets/') ? sub.img.replace('assets/', '') : sub.img %>" 
+                                                             style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h6 class="card-title fw-bold"><%= sub.title %></h6>
+                                                        <p class="card-text small text-muted text-truncate"><%= sub.desc %></p>
+                                                    </div>
+                                                    <div class="card-footer bg-white border-top-0 text-end">
+                                                        <form action="/admin/services/delete-sub/<%= catIndex %>/<%= subIndex %>" method="POST" onsubmit="return confirm('Delete this sub-service?');">
+                                                            <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                                                <i class="fas fa-trash-alt me-1"></i> Delete
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <p class="text-muted fst-italic">No sub-services yet.</p>
+                                    <% } %>
+                                    
+                                    <div class="col-md-6 col-lg-4">
+                                        <div class="card h-100 border-dashed border-2 bg-light d-flex align-items-center justify-content-center text-center p-4">
+                                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addSubModal-<%= catIndex %>">
+                                                <i class="fas fa-plus fa-2x mb-2 d-block"></i> Add Sub-Service
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="addSubModal-<%= catIndex %>" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="/admin/services/add-sub/<%= catIndex %>" method="POST" enctype="multipart/form-data">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add Sub-Service to "<%= category.mainService %>"</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" name="title" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Description</label>
+                                            <textarea name="desc" class="form-control" rows="3" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Image</label>
+                                            <input type="file" name="image" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">Add Item</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="text-center py-5">
+                <p class="text-muted">No services found.</p>
+            </div>
+        <% } %>
+    </div>
+
+    <div class="modal fade" id="addCategoryModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/admin/services/add-category" method="POST" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Service Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Category Name</label>
+                            <input type="text" name="mainService" class="form-control" placeholder="e.g. Solar Energy" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description (for Home Page)</label>
+                            <textarea name="mainDescription" class="form-control" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Category Icon</label>
+                            <input type="file" name="image" class="form-control" required>
+                            <small class="text-muted">This icon will appear on the Home Page cards.</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Unique ID (Optional)</label>
+                            <input type="text" name="id" class="form-control" placeholder="e.g. solar-energy">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

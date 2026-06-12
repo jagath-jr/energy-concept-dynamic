@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: 'Home | ' + (global.siteTitle || 'Energy Concept'), pageCss: 'home.css' }) %>
+
+<body>
+    <%- include('partials/header') %>
+    
+    <div id="header-placeholder"></div>
+
+    <main class="page-main">
+        <section class="hero-slider" aria-label="Hero Section">
+    <div class="hero-slider__wrapper" id="heroSliderWrapper">
+        <% 
+        // Build the slides array (fallback to current data if 'slides' doesn't exist yet)
+        let slides = home.slides || [{
+            title: home.heroTitle || 'Powering Industries with Reliable Energy Solutions',
+            description: home.heroDescription,
+            buttonText: home.heroButtonText || 'Request A Quote',
+            buttonLink: home.heroButtonLink || '/contact',
+            image: home.heroImage || 'images/home-img/index-hero.webp'
+        }];
+        %>
+
+        <% slides.forEach(function(slide, index) { %>
+            <div class="hero-slider__slide">
+                <div class="hero-slider__bg-container">
+                    <!-- Ensure correct image path rendering -->
+                    <img src="<%= slide.image.startsWith('assets/') ? slide.image.replace('assets/', '') : slide.image %>" 
+                         alt="<%= slide.title %>" class="hero-slider__bg-image">
+                    <div class="hero-slider__overlay"></div>
+                </div>
+                <div class="hero-slider__content-wrapper">
+                    <div class="hero-slider__text-group">
+                        <h1 class="hero-slider__title"><%= slide.title %></h1>
+                        <p class="hero-slider__description"><%= slide.description %></p>
+                        <div class="hero-slider__action">
+                            <a href="<%= slide.buttonLink %>" class="hero-slider__cta-btn">
+                                <%= slide.buttonText %>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</section>
+    </main>
+
+    <main class="page-content">
+        
+        <section class="trust-section" aria-label="Why Trust Us Section">
+            <div class="trust-section__container">
+                
+                <header class="trust-section__header">
+                    <span class="trust-section__subtitle"><%= home.trustSectionSubtitle %></span>
+                    <h2 class="trust-section__title"><%= home.trustSectionTitle %></h2>
+                </header>
+
+                <div class="trust-section__layout">
+                    
+                    <div class="trust-section__visual-col">
+                        <figure class="trust-section__figure">
+                            <img 
+                                src="images/home-img/index-whychooesus.webp" 
+                                alt="Engineers at work" 
+                                class="trust-section__main-image"
+                                loading="lazy" 
+                                width="600" 
+                                height="400"
+                            >
+                        </figure>
+                    </div>
+
+                    <div class="trust-section__content-col">
+                        <div class="trust-section__grid">
+                            
+                            <% if (home.trustFeatures && home.trustFeatures.length > 0) { %>
+                                <% home.trustFeatures.forEach(function(feature) { %>
+                                    <article class="trust-section__feature-item">
+                                        <div class="trust-section__icon-wrapper">
+                                            <img src="<%= feature.icon || 'images/icon/box-add.png' %>" alt="" class="trust-section__icon" aria-hidden="true">
+                                        </div>
+                                        <h3 class="trust-section__feature-text"><%= feature.text %></h3>
+                                    </article>
+                                <% }); %>
+                            <% } %>
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="serv-mod" aria-label="Our Services">
+        <div class="serv-mod__container">
+            
+            <header class="serv-mod__header">
+                <h2 class="serv-mod__main-title">Our Services</h2>
+            </header>
+
+            <div class="serv-mod__grid" id="services-grid">
+                
+                <div class="serv-mod__intro-block">
+                    <h3 class="serv-mod__intro-title"><%= home.servicesIntroTitle %></h3>
+                    <p class="serv-mod__intro-desc">
+                        <%= home.servicesIntroDesc %>
+                    </p>
+                    <div class="serv-mod__swipe-hint">
+                        <span>&larr; Swipe to explore &rarr;</span>
+                    </div>
+                </div>
+
+               <% if (services && Array.isArray(services) && services.length > 0) { %>
+                    <% services.forEach(function(service) { %>
+                        <a href="/services#<%= service.id %>" class="serv-mod__card-link">
+                            <article class="serv-mod__card">
+                                <div class="serv-mod__icon-wrap">
+                                    <% 
+                                        // 1. Get the icon path from data
+                                        let iconPath = service.categoryIcon;
+                                        
+                                        // 2. Check validity: If empty, null, or is the old titleimg, use the new default
+                                        if (!iconPath || iconPath.trim() === '' || iconPath.includes('titleimg.png')) {
+                                            iconPath = 'images/icon/box-add.png';
+                                        } 
+                                        // 3. If it's a custom uploaded image, fix the path for the browser
+                                        else if (iconPath.startsWith('assets/')) {
+                                            iconPath = iconPath.replace('assets/', '');
+                                        }
+                                    %>
+                                    <img src="<%= iconPath %>" alt="<%= service.mainService %> icon" style="width:40px; height: 40px; object-fit: contain;">
+                                </div>
+
+                                <h3 class="serv-mod__card-title"><%= service.mainService %></h3>
+                                <p class="serv-mod__card-desc"><%= service.mainDescription %></p>
+
+                                <div style="margin-top: auto;">
+                                    <span class="serv-mod__btn">Read More &rarr;</span>
+                                </div>
+                            </article>
+                        </a>
+                    <% }); %>
+                <% } else { %>
+                    <p style="padding: 2rem; grid-column: span 2; color: #666;">No services available. Please add categories in the Admin Panel.</p>
+                <% } %>
+               
+
+            </div>
+        </div>
+    </section>
+
+    <main class="pm-main-wrapper">
+        <section class="pm-contact-section">
+            <div class="pm-container">
+                
+                <div class="pm-content-grid">
+                    <article class="pm-form-container">
+                        <header>
+                            <h1 class="pm-heading">Get Your Free Quote Today</h1>
+                        </header>
+
+                        <form id="pm-contact-form" class="pm-form">
+                            <div class="pm-inputs-row">
+                                <div class="pm-input-group">
+                                    <input type="text" name="name" class="pm-input" placeholder="Name" required>
+                                </div>
+                                <div class="pm-input-group">
+                                    <input type="tel" name="phone" class="pm-input" placeholder="Phone No" required>
+                                </div>
+                                <div class="pm-input-group">
+                                    <input type="email" name="email" class="pm-input" placeholder="Email" required>
+                                </div>
+                                <div class="pm-input-group">
+                                    <div class="pm-select-wrapper">
+                                        <select name="service" class="pm-input pm-select" required>
+                                           <option value="" disabled selected>Choose services</option>
+                                            <option value="Energy Consultation">Energy Consultation</option>
+                                            <option value="Installation">Installation</option>
+                                            <option value="Maintenance & Repair">Maintenance & Repair</option>
+                                            <option value="Battery Storage Solutions">Battery Storage Solutions</option>
+                                            <option value="EV Charger Installation">EV Charger Installation</option>
+                                            <option value="Energy Efficiency Audit">Energy Efficiency Audit</option>
+                                            <option value="Request a Free Quote">Request a Free Quote</option>
+                                            <option value="Technical Support">Technical Support</option>
+                                            <option value="Other Inquiry">Other Inquiry</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pm-textarea-group">
+                                <textarea name="message" class="pm-textarea" placeholder="Your Message"></textarea>
+                            </div>
+
+                            <button type="submit" class="pm-btn-submit">Submit</button>
+                        </form>
+                    </article>
+
+                    <aside class="pm-info-card">
+                        <div class="pm-info-group">
+                            <h3 class="pm-info-title">Address</h3>
+                            <address class="pm-info-text">
+                                <%- global.address.replace(/\n/g, '<br>') %>
+                            </address>
+                        </div>
+
+                        <div class="pm-info-group">
+                            <h3 class="pm-info-title">Contact</h3>
+                            <div class="pm-info-text">
+                                <a href="tel:<%= global.phonePrimary.replace(/\s+/g, '') %>"><%= global.phonePrimary %></a><br>
+                                <a href="mailto:<%= global.email %>"><%= global.email %></a>
+                            </div>
+                        </div>
+
+                        <div class="pm-info-group">
+                            <h3 class="pm-info-title">Business Hours</h3>
+                            <div class="pm-info-text">
+                                Monday - Saturday: 10AM - 5PM<br>
+                                Sunday: Closed
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>   
+
+    <%- include('partials/footer') %>
+
+    <script src="js/main.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/email.js"></script>
+
+</body>
+</html>

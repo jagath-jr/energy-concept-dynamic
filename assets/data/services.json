@@ -1,0 +1,217 @@
+[
+  {
+    "id": "power-projects",
+    "mainService": "Power Projects",
+    "mainDescription": "Energy Concepts delivers end-to-end solutions for high-voltage and extra high-voltage power infrastructure projects. We specialize in cable laying, jointing, substation works, and system upgrades, ensuring safe execution, regulatory compliance, and long-term reliability. Our experienced teams handle complex projects up to EHV levels with precision and efficiency.",
+    "subParts": [
+      {
+        "title": "HV/EHV Cable Laying & Jointing (up to 220kV)",
+        "desc": "Professional installation and jointing of high and extra high voltage cables ensuring safe and reliable power transmission.",
+        "img": "assets/images/our-service-images/hv---ehv-cable-laying--jointing-up-to-220kv.webp",
+        "alt": "High voltage cable installation"
+      },
+      {
+        "title": "Overhead & Underground Cabling Works",
+        "desc": "Execution of overhead and underground cabling projects for transmission and distribution networks.",
+        "img": "assets/images/our-service-images/overhead--underground-cabling-works.webp",
+        "alt": "Cabling works infrastructure"
+      },
+      {
+        "title": "Substation Design, Installation & Commissioning (up to 400kV)",
+        "desc": "Complete substation solutions including engineering, installation, testing, and commissioning of GIS and AIS substations.",
+        "img": "assets/images/our-service-images/substation-design-installation--commissioning-up-to-400kv.webp",
+        "alt": "Substation infrastructure"
+      },
+      {
+        "title": "Switchgears, RMUs & Transformer Installation",
+        "desc": "Installation and integration of switchgears, ring main units, and transformers for utility and industrial applications.",
+        "img": "assets/images/our-service-images/switchgears-rmus--transformer-installation.webp",
+        "alt": "Switchgear and transformer units"
+      },
+      {
+        "title": "High-Voltage Testing & Diagnostics (HVAC, PD Testing)",
+        "desc": "Advanced testing services to assess utility and equipment health, detect faults, and ensure system reliability.",
+        "img": "assets/images/our-service-images/high-voltage-testing--diagnostics-hvac-pd-testing.webp",
+        "alt": "High voltage diagnostic testing"
+      },
+      {
+        "title": "Rehabilitation & Upgrading of Electrical Systems",
+        "desc": "Upgrading aging electrical infrastructure to restore operational efficiency and safety.",
+        "img": "assets/images/our-service-images/rehabilitation--upgrading-of-electrical-systems.webp",
+        "alt": "Electrical system upgrade works"
+      }
+    ]
+  },
+  {
+    "id": "turbomachinery-services",
+    "mainService": "Turbomachinery Services",
+    "mainDescription": "We provide comprehensive turbomachinery services for power generation and industrial facilities, covering gas and steam turbines, generators, boilers, and auxiliary systems. Our services focus on improving performance, extending equipment life, and minimizing downtime through planned maintenance and advanced diagnostics.",
+    "subParts": [
+      {
+        "title": "Gas & Steam Turbine Overhaul and Maintenance",
+        "desc": "Comprehensive maintenance and overhaul services to enhance turbine efficiency and reliability.",
+        "img": "assets/images/our-service-images/gas--steam-turbine-overhaul-and-maintenance.webp",
+        "alt": "Turbine overhaul works"
+      },
+      {
+        "title": "Generator, Boiler & Auxiliary Systems Servicing",
+        "desc": "Maintenance and servicing of generators, boilers, and supporting auxiliary systems.",
+        "img": "assets/images/our-service-images/generator-boiler--auxiliary-systems-servicing.webp",
+        "alt": "Generator and boiler servicing"
+      },
+      {
+        "title": "Turbine Upgrading, Revamping & Retrofitting",
+        "desc": "Modernization of turbine systems to improve performance and mechanical life.",
+        "img": "assets/images/our-service-images/turbine-upgrading-revamping--retrofitting.webp",
+        "alt": "Turbine retrofit project"
+      },
+      {
+        "title": "Rotor Overhaul & Component Refurbishment",
+        "desc": "Precision refurbishment of rotors and critical components to extend operational life.",
+        "img": "assets/images/our-service-images/rotor-overhaul--component-refurbishment.webp",
+        "alt": "Rotor overhaul"
+      },
+      {
+        "title": "Control System Retrofits",
+        "desc": "Upgrading turbine control systems with modern automation and monitoring solutions.",
+        "img": "assets/images/our-service-images/control-system-retrofits.webp",
+        "alt": "Control system panel"
+      },
+      {
+        "title": "Condition Monitoring & Vibration Analysis",
+        "desc": "Continuous monitoring and vibration analysis to detect early faults and prevent unplanned shutdowns.",
+        "img": "assets/images/our-service-images/condition-monitoring--vibration-analysis.webp",
+        "alt": "Vibration analysis equipment"
+      },
+      {
+        "title": "Training Programs for Engineers and Technicians",
+        "desc": "Technical training programs focused on turbomachinery operation, maintenance, and safety.",
+        "img": "assets/images/our-service-images/training-programs-for-engineers-and-technicians.webp",
+        "alt": "Engineering training session"
+      }
+    ]
+  },
+  {
+    "id": "scada-automation",
+    "mainService": "SCADA & Automation",
+    "mainDescription": "Energy Concepts offers advanced SCADA and automation solutions to enhance system control, monitoring, and operational efficiency. We design and integrate reliable automation systems for substations and distribution networks, enabling real-time data visibility and improved decision-making.",
+    "subParts": [
+      {
+        "title": "SCADA System Design & Integration",
+        "desc": "Design and implementation of SCADA systems for real-time monitoring and control of power assets.",
+        "img": "assets/images/our-service-images/scada-system-design--integration.webp",
+        "alt": "SCADA design screen"
+      },
+      {
+        "title": "Substation & Feeder Automation",
+        "desc": "Automation solutions to improve reliability, fault response, and operational efficiency of substations and feeders.",
+        "img": "assets/images/our-service-images/substation--feeder-automation.webp",
+        "alt": "Substation automation"
+      },
+      {
+        "title": "Network Management Systems",
+        "desc": "Centralized systems for monitoring, managing, and optimizing power distribution networks.",
+        "img": "assets/images/our-service-images/network-management-systems.webp",
+        "alt": "Network management interface"
+      },
+      {
+        "title": "RTU Supply, Configuration & Commissioning",
+        "desc": "Supply and commissioning of RTUs for accurate data acquisition and remote system control.",
+        "img": "assets/images/our-service-images/rtu-supply-configuration--commissioning.webp",
+        "alt": "RTU hardware configuration"
+      },
+      {
+        "title": "Control System Engineering & Integration",
+        "desc": "Engineering and integration of control systems tailored to project and operational needs.",
+        "img": "assets/images/our-service-images/control-system-engineering--integration.webp",
+        "alt": "Control system integration"
+      }
+    ]
+  },
+  {
+    "id": "testing-diagnostic-services",
+    "mainService": "Testing & Diagnostic Services",
+    "mainDescription": "Our testing and diagnostic services ensure the safety, reliability, and performance of electrical assets. Using modern testing equipment and industry best practices, we help clients identify potential faults, prevent failures, and extend the life of critical power equipment.",
+    "subParts": [
+      {
+        "title": "High-Voltage AC & DC Testing",
+        "desc": "Comprehensive testing of high-voltage systems to ensure safe commissioning and operation.",
+        "img": "assets/images/our-service-images/high-voltage-ac--dc-testing.webp",
+        "alt": "High voltage AC DC testing"
+      },
+      {
+        "title": "HVAC Resonant Testing of Power Cables",
+        "desc": "On-site resonant testing of high-voltage power cables for system integrity.",
+        "img": "assets/images/our-service-images/hvac-resonant-testing-of-power-cables.webp",
+        "alt": "Resonant testing setup"
+      },
+      {
+        "title": "Partial Discharge Measurement",
+        "desc": "Detection of insulation defects in cables and equipment to prevent future failures.",
+        "img": "assets/images/our-service-images/partial-discharge-measurement.webp",
+        "alt": "Partial discharge measurement"
+      },
+      {
+        "title": "Primary & Secondary Injection Testing",
+        "desc": "Testing of protection relays and control systems to ensure accurate operation.",
+        "img": "assets/images/our-service-images/primary--secondary-injection-testing.webp",
+        "alt": "Injection testing equipment"
+      },
+      {
+        "title": "Transformer Oil Testing & Dissolved Gas Analysis (DGA)",
+        "desc": "Analysis of transformer oil to assess internal health and support predictive maintenance.",
+        "img": "assets/images/our-service-images/transformer-oil-testing--dissolved-gas-analysis-dga.webp",
+        "alt": "Oil analysis laboratory"
+      },
+      {
+        "title": "Condition Monitoring Systems",
+        "desc": "Monitoring solutions to track equipment condition and identify potential faults early.",
+        "img": "assets/images/our-service-images/condition-monitoring-systems.webp",
+        "alt": "Condition monitoring display"
+      }
+    ]
+  },
+  {
+    "id": "general-trading",
+    "mainService": "General Trading",
+    "mainDescription": "Energy Concepts supplies high-quality electrical and power equipment sourced from trusted manufacturers. Our trading division supports utility, industrial, and energy projects with reliable products that meet international and regional standards.",
+    "subParts": [
+      {
+        "title": "Power Cables (LV, MV, HV up to 230kV)",
+        "desc": "Supply of high-quality power cables meeting international standards for various applications.",
+        "img": "assets/images/our-service-images/power-cables-lv-mv-hv-up-to-230kv.webp",
+        "alt": "High voltage power cables"
+      },
+      {
+        "title": "Transformers & Reactors",
+        "desc": "Supply of power and distribution transformers and reactors for energy applications.",
+        "img": "assets/images/our-service-images/transformers--reactors.webp",
+        "alt": "Industrial transformers"
+      },
+      {
+        "title": "Switchgears & Electrical Panels",
+        "desc": "Provision of reliable switchgears and panels for power distribution and control systems.",
+        "img": "assets/images/our-service-images/switchgears--electrical-panels.webp",
+        "alt": "Electrical panels"
+      },
+      {
+        "title": "Energy & Water Meters",
+        "desc": "Supply of accurate metering solutions for utility and industrial usage.",
+        "img": "assets/images/our-service-images/energy--water-meters.webp",
+        "alt": "Industrial meters"
+      },
+      {
+        "title": "Gas Turbine Spare Parts & Air Filters",
+        "desc": "Supply of genuine spare parts and filters to support turbine performance and reliability.",
+        "img": "assets/images/our-service-images/gas-turbine-spare-parts--air-filters.webp",
+        "alt": "Turbine spare parts"
+      },
+      {
+        "title": "Fiber Optic Cables",
+        "desc": "Supply of fiber optic cables for communication and control networks.",
+        "img": "assets/images/our-service-images/fiber-optic-cables.webp",
+        "alt": "Fiber optic cable spool"
+      }
+    ]
+  }
+]

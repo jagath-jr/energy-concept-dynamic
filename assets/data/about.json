@@ -1,0 +1,34 @@
+{
+  "pageTitle": "About Us",
+  "mainDescription": "Energy Concepts Electrical Services Co. LLC is an Abu Dhabi–based engineering company established in 2011, delivering reliable and cost-effective solutions across the Power, Energy, Oil & Gas, Water, and Industrial sectors. With strong technical expertise and a skilled workforce, we execute complex turnkey projects with a focus on safety, quality, and long-term partnerships.",
+  "mainImage": "assets/images/aboutus-visionsection.webp",
+  "visionTitle": "Vision",
+  "visionText": "To be a trusted engineering partner in the Power & Energy sector, recognized for technical excellence, innovation, and sustainable growth across the region.",
+  "missionTitle": "Mission",
+  "missionText": "To continuously improve through technology, skilled people, and best industry practices & build long-term relationships through trust, performance, and customer satisfaction.",
+  "offers": [
+    {
+      "icon": "fas fa-industry",
+      "text": "SCADA & Automation Specialists"
+    },
+    {
+      "icon": "fas fa-lightbulb",
+      "text": "Strong Safety & Quality Standards"
+    },
+    {
+      "icon": "fas fa-chart-line",
+      "text": "Long-Term Client Partnerships"
+    },
+    {
+      "icon": "fas fa-handshake",
+      "text": "Cost-Effective & Reliable Solutions"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Abu Dhabi Economic License",
+      "image": "assets/images/certificate/certificate.jpg",
+      "description": "Recognized for excellence."
+    }
+  ]
+}

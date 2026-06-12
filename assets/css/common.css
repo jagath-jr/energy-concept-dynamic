@@ -1,0 +1,417 @@
+/* General Body Styles */
+/* --- 1. RESET & BASICS --- */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+  box-sizing: border-box;
+  margin: 0;
+  padding-top: 5rem; /* Space for fixed header */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- 2. HEADER WRAPPER --- */
+#headerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: transform 0.4s ease-in-out;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.hide-header {
+  transform: translateY(-100%);
+}
+.top-border{
+  background: #3766B8;
+  
+  padding:.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+padding: 0 3rem;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo img {
+  width: 5rem;
+  display: block;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #000;
+  user-select: none;
+}
+
+/* --- 3. DESKTOP STYLES & ANIMATION --- */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Desktop Load Animation */
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nav-links li, .btn-outline {
+  animation: slideDownFade 0.8s ease forwards;
+  /* Uses the variable we added in HTML for delay */
+  animation-delay: calc(var(--i) * 0.1s); 
+  opacity: 0; /* Hidden before animation starts */
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  padding-bottom: 5px;
+  transition: border-bottom 0.2s ease;
+}
+
+.nav-links li a:hover {
+  border-bottom: 2px solid #010101;
+}
+
+/* --- 4. BUTTON STYLES --- */
+.btn-outline {
+  background: linear-gradient(180deg, #3766B8, #F34546);
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-outline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 5. MOBILE RESPONSIVE ANIMATION --- */
+@media (max-width: 768px) {
+  
+  .menu-icon { display: block; }
+
+  /* Mobile Menu Container */
+.nav-right {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0; /* Stretch to both sides */
+  margin: 0 auto; /* Center horizontally */
+  width: 90%;
+  max-width: 400px; /* Optional: limit maximum width */
+  background: white;
+  flex-direction: column;
+  padding: 30px 0;
+  gap: 20px;
+  box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+  z-index: 900;
+  border-radius: 8px;
+
+  /* Hidden State */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+  /* Active State (Toggled by JS) */
+  .nav-right.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Reset Desktop Animation */
+  .nav-links li, .btn-outline {
+    animation: none;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.4s ease;
+  }
+
+  /* Mobile Staggered Entrance */
+  .nav-right.active .nav-links li,
+  .nav-right.active .btn-outline {
+    opacity: 1;
+    transform: translateX(0);
+    /* Calculate delay based on index */
+    transition-delay: calc(var(--i) * 0.1s);
+  }
+}
+
+
+
+
+/* =========================================
+   Footer Styles
+   ========================================= */
+
+
+/* --- Footer Container --- */
+.ec-footer {
+    position: relative;
+    width: 100%;
+    /* Background Image Placeholder - Replace URL if needed */
+    background-image: url('../images/footerimg.webp'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    padding: 60px 0 20px 0;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden; /* Prevents overflow issues */
+}
+
+/* Blue Overlay Gradient */
+.ec-footer__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient matches reference: lighter blue to darker blue */
+    background: linear-gradient(135deg, rgba(84, 126, 184, 0.9) 0%, rgba(44, 69, 116, 0.95) 100%);
+    z-index: 1;
+}
+
+.ec-footer__container {
+    position: relative;
+    z-index: 2; /* Ensures content is above the overlay */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Layout Grid --- */
+.ec-footer__content {
+    display: grid;
+    /* 3 Columns: Brand (Wide) | Links (Narrow) | Contact (Wide) */
+    grid-template-columns: 1.5fr 1fr 1.2fr; 
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* --- Column 1: Brand & Logo --- */
+.ec-footer__col--brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* UPDATED: Logo Wrapper for Image */
+.ec-footer__logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the image horizontally */
+    margin-bottom: 15px;
+}
+/* UPDATED: Logo Image Style */
+.ec-footer__logo-img {
+    height: 8rem; /* Increased slightly for better visibility alone, adjust as needed */
+    width: auto;
+    object-fit: contain;
+}
+
+.ec-footer__company-name {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.ec-footer__socials {
+    display: flex;
+    gap: 15px;
+}
+
+.ec-footer__social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 1);
+    color: #4a76a8; /* Theme blue color for icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.ec-footer__social-link:hover {
+    transform: translateY(-3px);
+    background-color: #ffd700; /* Gold hover effect */
+    color: #fff;
+}
+
+/* --- Headings for Col 2 & 3 --- */
+.ec-footer__heading {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* --- Column 2: Quick Links --- */
+.ec-footer__nav {
+    list-style: none;
+}
+.ec-footer__nav,
+.ec-footer__contact-list {
+    list-style: none; /* Removes the bullet points */
+    padding: 0;       /* Removes the 40px default indentation */
+    margin: 0;        /* Removes default vertical spacing */
+}
+
+.ec-footer__nav li {
+    margin-bottom: 12px;
+}
+
+.ec-footer__nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.ec-footer__nav a:hover {
+    color: #ffd700;
+    padding-left: 5px;
+}
+
+/* --- Column 3: Contact Info --- */
+.ec-footer__contact-list {
+    list-style: none;
+}
+
+.ec-footer__contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+.ec-footer__contact-list i {
+    margin-top: 5px; /* Align icon with first line of text */
+    width: 20px;
+}
+
+.ec-footer__spacer {
+    width: 20px; /* matches icon width for alignment */
+    display: inline-block;
+}
+
+.ec-footer__contact-list a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ec-footer__contact-list a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+/* --- Bottom Section (Copyright) --- */
+.ec-footer__separator {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 20px;
+}
+
+.ec-footer__bottom {
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================
+   Responsive Design (Media Queries)
+   ========================================= */
+
+/* Tablet (Max-width 992px) */
+@media screen and (max-width: 992px) {
+    .ec-footer__content {
+        grid-template-columns: 1fr 1fr; /* 2 columns */
+    }
+    
+    /* Make brand full width on tablet */
+    .ec-footer__col--brand {
+        grid-column: span 2;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .ec-footer__logo-wrapper {
+        justify-content: center;
+    }
+}
+
+/* Mobile (Max-width 600px) */
+@media screen and (max-width: 600px) {
+    .ec-footer__content {
+        grid-template-columns: 1fr; /* Stack everything */
+        gap: 30px;
+        text-align: center;
+    }
+
+    .ec-footer__col--brand {
+        grid-column: span 1;
+    }
+
+    /* Center align contact items on mobile */
+    .ec-footer__contact-list li {
+        justify-content: center;
+    }
+
+    .ec-footer__company-name {
+        font-size: 1.5rem;
+    }
+}

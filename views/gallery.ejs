@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head', { title: 'Gallery | ' + (global.siteTitle || 'Energy Concept'), pageCss: 'gallery.css' }) %>
+
+<body>
+    <%- include('partials/header') %>
+    
+    <div id="header-placeholder"></div>
+
+    <section class="services-hero">
+        <div class="banner" data-aos="fade-down" data-aos-delay="200">
+            <h2>Gallery</h2>
+        </div>
+    </section>
+
+    <section class="description">
+        <p>
+            Explore our gallery featuring completed power transmission, distribution, and electromechanical projects delivered with engineering excellence and uncompromising safety standards.
+        </p>
+    </section>
+
+    <main class="gallery-section">
+        <div class="gallery-grid" id="galleryDiv">
+            
+            <% if (gallery && gallery.length > 0) { %>
+                <% gallery.forEach(function(img, index) { %>
+                    <div class="gallery-item" data-aos="fade-up">
+                        <label for="img-modal-<%= index %>">
+                            <img src="<%= img.src.startsWith('assets/') ? img.src.replace('assets/', '') : img.src %>" 
+                                 alt="<%= img.alt %>" 
+                                 loading="lazy" />
+                            <!-- <div class="caption"><%= img.alt || 'Project Image' %></div> -->
+                        </label>
+                    </div>
+
+                    <input type="checkbox" id="img-modal-<%= index %>" class="modal-toggle" />
+                    <div class="modal-box">
+                        <label for="img-modal-<%= index %>" class="overlay"></label>
+                        <div class="modal-content-box">
+                            <label for="img-modal-<%= index %>" class="close-btn">&times;</label>
+                            <img src="<%= img.src.startsWith('assets/') ? img.src.replace('assets/', '') : img.src %>" 
+                                 alt="<%= img.alt %>" />
+                            <p class="modal-caption"><%= img.alt || 'Project Image' %></p>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p style="text-align:center; width:100%; color:#666;">No images found in the gallery.</p>
+            <% } %>
+
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script src="js/main.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+    </script>
+</body>
+</html>

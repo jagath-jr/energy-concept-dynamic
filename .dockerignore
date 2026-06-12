@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Git / Version Control
+.git
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+.dockerignore
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.idea
+.vscode
+*.swp
+*.swo
+
+# Local Development Secrets (Safety precaution)
+.env
+
+# Optional: Ignore local uploads if you want the container to start fresh
+# assets/images/uploads/*
+# assets/data/backups/*
