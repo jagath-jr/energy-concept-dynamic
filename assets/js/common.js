@@ -1,17 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     // --- 1. Mobile Menu Toggle ---
     const menuBtn = document.getElementById('menuBtn');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-links li a');
-
+    
     if (menuBtn && navMenu) {
         // Toggle menu on click
         menuBtn.addEventListener('click', () => {
             menuBtn.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
-
+        
         // Close menu when a link is clicked (useful for single-page jumps)
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 navMenu.classList.remove('active');
             });
         });
-
+        
         // Close menu if clicking outside
         document.addEventListener('click', (e) => {
             if (!navMenu.contains(e.target) && !menuBtn.contains(e.target) && navMenu.classList.contains('active')) {
@@ -51,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. Sticky Header Logic ---
     const header = document.getElementById('headerWrapper');
     const stickyThreshold = 50; // Scroll amount before header gets sticky
-
+    
     if (header) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > stickyThreshold) {
@@ -67,5 +66,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearSpan = document.querySelector('.footer-year'); 
     if(yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- 5. Footer Animations (GSAP) ---
+    // We check if GSAP is loaded to prevent errors on pages without it
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        if (document.querySelector('#ec-footer-section')) {
+            const footerTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: "#ec-footer-section",
+                    start: "top 90%", // Triggers when the top of the footer is 90% down the screen
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // 1. Stagger the three columns sliding up
+            footerTl.from(".ec-footer__col", {
+                y: 40, 
+                opacity: 0, 
+                duration: 0.8, 
+                stagger: 0.2, // Adds a 0.2s delay between each column appearing
+                ease: "power3.out"
+            })
+            // 2. Fade in the separator line and bottom copyright text smoothly
+            .from(".ec-footer__separator, .ec-footer__bottom", {
+                opacity: 0, 
+                y: 15,
+                duration: 0.6, 
+                ease: "power2.out"
+            }, "-=0.4"); // The "-=0.4" makes this start before the column animation finishes
+        }
     }
 });
