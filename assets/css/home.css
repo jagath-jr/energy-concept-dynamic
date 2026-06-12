@@ -312,147 +312,155 @@
     --trust-gap: 2rem;
 }
 
+/* --- TRUST SECTION --- */
 .trust-section {
-   
-    padding: 60px 20px;
-    background-color: var(--trust-bg-white);
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; /* Fallback fonts */
-    overflow: hidden; /* Prevents scrollbars during animations */
+    position: relative;
+    padding: 100px 0;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Background Image */
+.trust-section__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Replace this URL with the actual background image you want to use */
+    background-image: url('../images/aboutus-hero.webp'); 
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+/* Gradient Overlay matching the UI design */
+.trust-section__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Soft purple-to-red gradient with 85% opacity */
+    background: linear-gradient(135deg, rgba(91, 84, 164, 0.85) 0%, rgba(216, 75, 91, 0.85) 100%);
+    z-index: 2;
 }
 
 .trust-section__container {
+    position: relative;
+    z-index: 3; /* Brings content above the overlay */
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* --- Header Styling --- */
+/* Headings */
 .trust-section__header {
     margin-bottom: 40px;
 }
 
 .trust-section__subtitle {
     display: block;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--trust-primary-text);
-    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #e0e0e0;
 }
 
 .trust-section__title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--trust-primary-text);
+    font-size: 3rem;
+    font-weight: 700;
     margin: 0;
-    line-height: 1.2;
+    color: #ffffff;
 }
 
-/* --- Layout (Grid System) --- */
+/* Layout */
 .trust-section__layout {
-    display: grid;
-    grid-template-columns: 1fr; /* Mobile: Stacked */
-    gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
     align-items: center;
 }
 
-/* --- Visual Column (Image) --- */
 .trust-section__visual-col {
-    width: 100%;
-}
-
-.trust-section__figure {
-    margin: 0;
-    width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    flex: 1 1 45%;
 }
 
 .trust-section__main-image {
     width: 100%;
     height: auto;
-    display: block;
-    object-fit: cover;
-    aspect-ratio: 4/3; /* Enforces consistent shape */
+    border-radius: 20px; /* Rounded corners like the design */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-/* --- Features Grid --- */
+.trust-section__content-col {
+    flex: 1 1 45%;
+}
+
+/* 2x2 Grid for Features */
 .trust-section__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Mobile: 1 column */
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 30px;
 }
 
 .trust-section__feature-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center align on mobile */
     text-align: center;
 }
 
+/* Circular Gradient Icon Background */
 .trust-section__icon-wrapper {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: var(--trust-accent-gradient);
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
     align-items: center;
-    margin-bottom: 15px;
-    box-shadow: 0 8px 15px rgba(161, 140, 209, 0.3);
-    transition: transform 0.3s ease;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5b54a4 0%, #d84b5b 100%);
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* Subtle hover effect for interactivity */
-.trust-section__feature-item:hover .trust-section__icon-wrapper {
-    transform: translateY(-5px);
-}
-
+/* Force original black/colored icons to render as pure white */
 .trust-section__icon {
-    width: 40px;
-    height: 40px;
-    filter: brightness(0) invert(1); /* Turns black icons white */
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); 
 }
 
 .trust-section__feature-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
+    font-weight: 400;
     line-height: 1.5;
-    font-weight: 500;
-    color: var(--trust-secondary-text);
+    color: #ffffff;
     margin: 0;
-    max-width: 250px;
+}
+/* --- TRUST SECTION COUNTERS --- */
+.counter-number {
+    /* font-weight: 800;
+    font-size: 1.3em; */
+    display: inline-block;
+    /* Optional: Add a subtle gradient to the numbers to match the theme */
+    background: linear-gradient(90deg, #ffffff 0%, #fbd5d9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* --- Responsive Media Queries --- */
-
-/* Tablet & Up (Switch features to 2x2 grid) */
-@media (min-width: 600px) {
-    .trust-section__grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-    }
-}
-
-/* Desktop & Up (Side by side layout) */
-@media (min-width: 992px) {
-    .trust-section {
-        padding: 100px 20px;
-    }
-
+/* Mobile Responsiveness */
+@media (max-width: 992px) {
     .trust-section__layout {
-        grid-template-columns: 1.1fr 0.9fr; /* Image slightly larger */
-        gap: 60px;
+        flex-direction: column;
     }
-    
-    .trust-section__feature-item {
-        align-items: flex-start; /* Left align text on desktop */
-        text-align: left;
-    }
-
     .trust-section__title {
-        font-size: 3.5rem;
+        font-size: 2.2rem;
     }
 }
 
+@media (max-width: 576px) {
+    .trust-section__grid {
+        grid-template-columns: 1fr; /* Stack features on very small screens */
+    }
+}
 
 
 

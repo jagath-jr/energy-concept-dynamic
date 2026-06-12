@@ -191,18 +191,68 @@ function initHeroSlider() {
         logos.forEach(logo => logo.addEventListener('click', () => console.log(`Clicked logo: ${logo.alt}`)));
     }
 
-    function initGSAPAnimations() {
+function initGSAPAnimations() {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
         
+        // --- TRUST SECTION ANIMATIONS ---
         if (document.querySelector('.trust-section')) {
+            // 1. Slide down the main section header
             gsap.from(".trust-section__header", {
                 y: 50, opacity: 0, duration: 1, ease: "power3.out",
                 scrollTrigger: { trigger: ".trust-section", start: "top 85%" }
             });
-            // Additional trust animations...
+            
+            // 2. Slide in the main foreground image from the left
+            gsap.from(".trust-section__visual-col", {
+                x: -60, opacity: 0, duration: 1.2, ease: "power3.out",
+                scrollTrigger: { trigger: ".trust-section", start: "top 75%" }
+            });
+
+            // 3. Auto-detect numbers in the text and prep them for counting
+            const featureTexts = document.querySelectorAll('.trust-section__feature-text');
+            featureTexts.forEach(el => {
+                const originalText = el.innerHTML;
+                // This regex finds any continuous numbers (35, 400, 220) and wraps them in a span
+                el.innerHTML = originalText.replace(/(\d+)/g, '<span class="counter-number" data-target="$1">0</span>');
+            });
+
+            // 4. Stagger pop-in the icons and text
+            gsap.from(".trust-section__feature-item", {
+                scrollTrigger: { 
+                    trigger: ".trust-section__grid", 
+                    start: "top 80%",
+                    // When the icons appear, trigger the number counters
+                    onEnter: runCounters 
+                },
+                y: 40, 
+                scale: 0.9,
+                opacity: 0, 
+                duration: 0.8, 
+                stagger: 0.15, 
+                ease: "back.out(1.5)"
+            });
+
+            // 5. The Counter Animation Logic
+            function runCounters() {
+                const counters = document.querySelectorAll('.counter-number');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    
+                    // Create a dummy object for GSAP to animate from 0 to the target
+                    let countObj = { val: 0 };
+                    gsap.to(countObj, {
+                        val: target,
+                        duration: 2, // 2 seconds to finish counting
+                        ease: "power2.out", // Starts fast, slows down smoothly at the end
+                        onUpdate: function() {
+                            // Update the HTML with the current rounded number
+                            counter.innerText = Math.floor(countObj.val);
+                        }
+                    });
+                });
+            }
         }
     }
-
     function initContactFormAnimations() {
         if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
             const formElements = document.querySelectorAll('.pm-heading, .pm-input-group, .pm-textarea-group, .pm-btn-submit');

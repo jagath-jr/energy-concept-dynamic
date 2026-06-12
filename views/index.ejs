@@ -49,48 +49,50 @@
     <main class="page-content">
         
         <section class="trust-section" aria-label="Why Trust Us Section">
-            <div class="trust-section__container">
-                
-                <header class="trust-section__header">
-                    <span class="trust-section__subtitle"><%= home.trustSectionSubtitle %></span>
-                    <h2 class="trust-section__title"><%= home.trustSectionTitle %></h2>
-                </header>
+    <!-- Background Image & Gradient Overlay -->
+    <div class="trust-section__bg">
+        <div class="trust-section__overlay"></div>
+    </div>
 
-                <div class="trust-section__layout">
-                    
-                    <div class="trust-section__visual-col">
-                        <figure class="trust-section__figure">
-                            <img 
-                                src="images/home-img/index-whychooesus.webp" 
-                                alt="Engineers at work" 
-                                class="trust-section__main-image"
-                                loading="lazy" 
-                                width="600" 
-                                height="400"
-                            >
-                        </figure>
-                    </div>
-
-                    <div class="trust-section__content-col">
-                        <div class="trust-section__grid">
-                            
-                            <% if (home.trustFeatures && home.trustFeatures.length > 0) { %>
-                                <% home.trustFeatures.forEach(function(feature) { %>
-                                    <article class="trust-section__feature-item">
-                                        <div class="trust-section__icon-wrapper">
-                                            <img src="<%= feature.icon || 'images/icon/box-add.png' %>" alt="" class="trust-section__icon" aria-hidden="true">
-                                        </div>
-                                        <h3 class="trust-section__feature-text"><%= feature.text %></h3>
-                                    </article>
-                                <% }); %>
-                            <% } %>
-
-                        </div>
-                    </div>
-                    
+    <div class="trust-section__container">
+        <header class="trust-section__header">
+            <span class="trust-section__subtitle"><%= home.trustSectionSubtitle %></span>
+            <h2 class="trust-section__title"><%= home.trustSectionTitle %></h2>
+        </header>
+        
+        <div class="trust-section__layout">
+            <!-- Left Column: Main Foreground Image -->
+            <div class="trust-section__visual-col">
+                <figure class="trust-section__figure">
+                    <img 
+                        src="images/home-img/index-whychooesus.webp" 
+                        alt="Engineers at work" 
+                        class="trust-section__main-image"
+                        loading="lazy" 
+                        width="600" 
+                        height="400"
+                    >
+                </figure>
+            </div>
+            
+            <!-- Right Column: Features Grid -->
+            <div class="trust-section__content-col">
+                <div class="trust-section__grid">
+                    <% if (home.trustFeatures && home.trustFeatures.length > 0) { %>
+                        <% home.trustFeatures.forEach(function(feature) { %>
+                            <article class="trust-section__feature-item">
+                                <div class="trust-section__icon-wrapper">
+                                    <img src="<%= feature.icon || 'images/icon/box-add.png' %>" alt="" class="trust-section__icon" aria-hidden="true">
+                                </div>
+                                <h3 class="trust-section__feature-text"><%= feature.text %></h3>
+                            </article>
+                        <% }); %>
+                    <% } %>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
     </main>
 
     <section class="serv-mod" aria-label="Our Services">
