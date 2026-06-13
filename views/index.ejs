@@ -153,17 +153,22 @@
         </div>
     </section>
 
-    <main class="pm-main-wrapper">
+<main class="pm-main-wrapper" id="quote-section">
+        <!-- Background Image & Overlay -->
+        <div class="pm-bg-container">
+            <div class="pm-bg-overlay"></div>
+        </div>
+
         <section class="pm-contact-section">
             <div class="pm-container">
-                
                 <div class="pm-content-grid">
+                    <!-- LEFT PANEL: Glassmorphism Form -->
                     <article class="pm-form-container">
                         <header>
                             <h1 class="pm-heading">Get Your Free Quote Today</h1>
                         </header>
-
                         <form id="pm-contact-form" class="pm-form">
+                            <!-- Row 1: Name & Phone -->
                             <div class="pm-inputs-row">
                                 <div class="pm-input-group">
                                     <input type="text" name="name" class="pm-input" placeholder="Name" required>
@@ -171,13 +176,17 @@
                                 <div class="pm-input-group">
                                     <input type="tel" name="phone" class="pm-input" placeholder="Phone No" required>
                                 </div>
+                            </div>
+                            
+                            <!-- Row 2: Email & Services -->
+                            <div class="pm-inputs-row">
                                 <div class="pm-input-group">
                                     <input type="email" name="email" class="pm-input" placeholder="Email" required>
                                 </div>
                                 <div class="pm-input-group">
                                     <div class="pm-select-wrapper">
                                         <select name="service" class="pm-input pm-select" required>
-                                           <option value="" disabled selected>Choose services</option>
+                                            <option value="" disabled selected>Choose services</option>
                                             <option value="Energy Consultation">Energy Consultation</option>
                                             <option value="Installation">Installation</option>
                                             <option value="Maintenance & Repair">Maintenance & Repair</option>
@@ -192,14 +201,15 @@
                                 </div>
                             </div>
 
+                            <!-- Row 3: Message -->
                             <div class="pm-textarea-group">
-                                <textarea name="message" class="pm-textarea" placeholder="Your Message"></textarea>
+                                <textarea name="message" class="pm-textarea" placeholder="Your Message" rows="5"></textarea>
                             </div>
-
                             <button type="submit" class="pm-btn-submit">Submit</button>
                         </form>
                     </article>
 
+                    <!-- RIGHT PANEL: Gradient Info Card -->
                     <aside class="pm-info-card">
                         <div class="pm-info-group">
                             <h3 class="pm-info-title">Address</h3>
@@ -207,7 +217,6 @@
                                 <%- global.address.replace(/\n/g, '<br>') %>
                             </address>
                         </div>
-
                         <div class="pm-info-group">
                             <h3 class="pm-info-title">Contact</h3>
                             <div class="pm-info-text">
@@ -215,7 +224,6 @@
                                 <a href="mailto:<%= global.email %>"><%= global.email %></a>
                             </div>
                         </div>
-
                         <div class="pm-info-group">
                             <h3 class="pm-info-title">Business Hours</h3>
                             <div class="pm-info-text">
@@ -227,9 +235,7 @@
                 </div>
             </div>
         </section>
-    </main>   
-
-    <%- include('partials/footer') %>
+    </main>    <%- include('partials/footer') %>
 
     <script src="js/main.js"></script>
     <script src="js/common.js"></script>

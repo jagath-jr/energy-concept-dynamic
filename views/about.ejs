@@ -44,23 +44,33 @@
         </div>
     </section>
 
-    <section class="offer-section">
-        <h2>What We Offer</h2>
-        
-        <div class="offer-cards">
-            <% if (content.offers && content.offers.length > 0) { %>
-                <% content.offers.forEach(function(offer, index) { %>
-                    <div class="offer-card" data-aos="fade-up" data-aos-delay="<%= (index + 1) * 100 %>">
-                        <div class="offer-card-icon">
-                            <i class="<%= offer.icon %>"></i>
-                        </div>
-                        <div><%= offer.text %></div>
-                    </div>
-                <% }); %>
-            <% } %>
+<section class="offer-section">
+        <div class="offer-container">
+            <!-- Background Image & Gradient Overlay -->
+            <div class="offer-bg">
+                <div class="offer-overlay"></div>
+            </div>
+            
+            <!-- Foreground Content Layer -->
+            <div class="offer-content">
+                <h2 class="offer-title">What We Offer</h2>
+                
+                <div class="offer-cards">
+                    <% if (content.offers && content.offers.length > 0) { %>
+                        <% content.offers.forEach(function(offer, index) { %>
+                            <div class="offer-card" data-aos="fade-up" data-aos-delay="<%= (index + 1) * 100 %>">
+                                <div class="offer-card-icon">
+                                    <!-- FontAwesome icon loaded from JSON -->
+                                    <i class="<%= offer.icon %>"></i> 
+                                </div>
+                                <div class="offer-card-text"><%= offer.text %></div>
+                            </div>
+                        <% }); %>
+                    <% } %>
+                </div>
+            </div>
         </div>
     </section>
-
     <main class="cert-main">
         <section class="cert-section">
             <div class="cert-container">
